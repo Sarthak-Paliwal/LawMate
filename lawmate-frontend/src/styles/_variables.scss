@@ -1,0 +1,54 @@
+// Colors - Mapped to CSS Variables
+$color-primary: var(--color-primary);
+$color-primary-light: var(--color-primary-light);
+$color-primary-dark: var(--color-primary-dark);
+
+$color-secondary: var(--color-secondary);
+$color-secondary-light: var(--color-secondary-light);
+$color-secondary-dark: var(--color-secondary-dark);
+
+$color-success: var(--color-success);
+$color-warning: var(--color-warning);
+$color-danger: var(--color-danger);
+$color-info: var(--color-info);
+
+$color-text-main: var(--color-text-main);
+$color-text-muted: var(--color-text-muted);
+$color-text-light: var(--color-text-light);
+
+$color-bg-body: var(--color-bg-body);
+$color-bg-card: var(--color-bg-card);
+$color-bg-input: var(--color-bg-input);
+$color-border: var(--color-border);
+
+// Spacing
+$spacing-1: 0.25rem;
+$spacing-2: 0.5rem;
+$spacing-3: 0.75rem;
+$spacing-4: 1rem;
+$spacing-5: 1.25rem;
+$spacing-6: 1.5rem;
+$spacing-8: 2rem;
+$spacing-10: 2.5rem;
+$spacing-12: 3rem;
+
+// Typography
+$font-family-base: 'Inter', system-ui, -apple-system, sans-serif;
+$font-size-xs: 0.75rem;
+$font-size-sm: 0.875rem;
+$font-size-base: 1rem;
+$font-size-lg: 1.125rem;
+$font-size-xl: 1.25rem;
+$font-size-2xl: 1.5rem;
+$font-size-3xl: 1.875rem;
+
+// Border Radius
+$radius-sm: 0.125rem;
+$radius-md: 0.375rem;
+$radius-lg: 0.5rem;
+$radius-xl: 0.75rem;
+$radius-2xl: 1rem;
+$radius-full: 9999px;
+
+// Transitions
+$transition-base: all 0.2s ease-in-out;

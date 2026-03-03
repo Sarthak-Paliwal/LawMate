@@ -1,0 +1,782 @@
+@use 'styles/variables' as *;
+@use 'styles/mixins' as *;
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Light Mode Tokens */
+  --color-primary: #1e3a8a; // Navy Blue
+  --color-primary-light: #3b82f6; // Blue 500
+  --color-primary-dark: #172554; // Blue 950
+
+  --color-secondary: #f59e0b; // Amber 500
+  --color-secondary-light: #fbbf24;
+  --color-secondary-dark: #d97706;
+
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-info: #3b82f6;
+
+  --color-text-main: #1e293b; // Slate 800
+  --color-text-muted: #64748b; // Slate 500
+  --color-text-light: #f8fafc; // Slate 50
+
+  --color-bg-body: #f8fafc; // Slate 50
+  --color-bg-card: #ffffff;
+  --color-bg-input: #ffffff;
+  --color-border: #e2e8f0; // Slate 200
+}
+
+.dark {
+  /* Dark Mode Tokens */
+  --color-primary: #60a5fa; // Blue 400 (Lighter for dark mode)
+  --color-primary-light: #93c5fd; // Blue 300
+  --color-primary-dark: #2563eb; // Blue 600
+
+  --color-secondary: #fbbf24; // Amber 400
+  --color-secondary-light: #fcd34d;
+  --color-secondary-dark: #f59e0b;
+
+  --color-text-main: #f1f5f9; // Slate 100
+  --color-text-muted: #94a3b8; // Slate 400
+  --color-text-light: #1e293b; // Slate 800 (Inverse)
+
+  --color-bg-body: #0f172a; // Slate 900
+  --color-bg-card: #1e293b; // Slate 800
+  --color-bg-input: #1e293b; // Slate 800
+  --color-border: #334155; // Slate 700
+}
+
+body {
+  font-family: $font-family-base;
+  background-color: $color-bg-body;
+  color: $color-text-main;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+@layer components {
+  .btn {
+    @include flex-center;
+    border-radius: $radius-lg;
+    font-weight: 500;
+    transition: $transition-base;
+    cursor: pointer;
+    border: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 0 2px rgba($color-primary-light, 0.5);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+
+  .btn-primary {
+    @extend .btn;
+    background-color: $color-primary;
+    color: white;
+    padding: $spacing-2 $spacing-4;
+
+    &:hover {
+      background-color: $color-primary-dark;
+    }
+  }
+
+  .btn-secondary {
+    @extend .btn;
+    background-color: $color-border;
+    color: $color-text-main;
+    padding: $spacing-2 $spacing-4;
+
+    &:hover {
+      filter: brightness(0.95);
+    }
+  }
+
+  .btn-ghost {
+    @extend .btn;
+    background-color: transparent;
+    color: $color-text-main;
+    padding: $spacing-2 $spacing-4;
+
+    &:hover {
+      background-color: rgba(148, 163, 184, 0.1); // Translucent slate
+    }
+  }
+
+  .input {
+    width: 100%;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border;
+    background-color: $color-bg-input;
+    padding: $spacing-2 $spacing-3;
+    color: $color-text-main;
+    transition: $transition-base;
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+      box-shadow: 0 0 0 1px $color-primary;
+    }
+
+    &::placeholder {
+      color: $color-text-muted;
+    }
+  }
+
+  .card {
+    border-radius: $radius-xl;
+    border: 1px solid $color-border;
+    background-color: $color-bg-card;
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .navbar {
+    background-color: $color-bg-card;
+    border-bottom: 1px solid $color-border;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .mobile-menu {
+    background-color: $color-bg-card;
+    border-bottom: 1px solid $color-border;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+  }
+
+  .text-default {
+    color: $color-text-main;
+  }
+
+  .text-muted {
+    color: $color-text-muted;
+  }
+
+  /* ========== Dashboard Layout ========== */
+
+  .dashboard-layout {
+    display: flex;
+    gap: $spacing-6;
+    min-height: 70vh;
+  }
+
+  .dashboard-sidebar {
+    width: 240px;
+    flex-shrink: 0;
+    border-radius: $radius-xl;
+    border: 1px solid $color-border;
+    background-color: $color-bg-card;
+    padding: $spacing-3;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    height: fit-content;
+    position: sticky;
+    top: 5.5rem;
+  }
+
+  .sidebar-item {
+    @include flex-center;
+    justify-content: flex-start;
+    gap: $spacing-3;
+    width: 100%;
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-lg;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    color: $color-text-muted;
+    transition: $transition-base;
+    cursor: pointer;
+    border: none;
+    background: transparent;
+    text-align: left;
+
+    &:hover {
+      background-color: rgba(99, 102, 241, 0.08);
+      color: $color-text-main;
+    }
+
+    &.active {
+      background-color: rgba(99, 102, 241, 0.12);
+      color: #6366f1;
+      font-weight: 600;
+    }
+  }
+
+  .sidebar-icon {
+    font-size: $font-size-lg;
+    width: 24px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .dashboard-content {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: $spacing-4;
+  }
+
+  .stats-card {
+    border-radius: $radius-xl;
+    border: 1px solid $color-border;
+    background-color: $color-bg-card;
+    padding: $spacing-5;
+    transition: $transition-base;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      transform: translateY(-2px);
+    }
+  }
+
+  .stats-value {
+    font-size: $font-size-3xl;
+    font-weight: 700;
+    color: $color-text-main;
+  }
+
+  .stats-label {
+    font-size: $font-size-sm;
+    color: $color-text-muted;
+    margin-top: $spacing-1;
+  }
+
+  .quick-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-3;
+    margin-top: $spacing-6;
+  }
+
+  .quick-action-btn {
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-4;
+    border-radius: $radius-lg;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    border: 1px solid $color-border;
+    background-color: $color-bg-card;
+    color: $color-text-main;
+    transition: $transition-base;
+    cursor: pointer;
+    text-decoration: none;
+
+    &:hover {
+      border-color: #6366f1;
+      color: #6366f1;
+      box-shadow: 0 2px 8px rgba(99, 102, 241, 0.12);
+    }
+  }
+
+  /* Mobile sidebar toggle */
+  .sidebar-toggle {
+    display: none;
+    @include flex-center;
+    gap: $spacing-2;
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border;
+    background-color: $color-bg-card;
+    color: $color-text-main;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    cursor: pointer;
+    margin-bottom: $spacing-4;
+    transition: $transition-base;
+  }
+
+  @media (max-width: 768px) {
+    .dashboard-layout {
+      flex-direction: column;
+    }
+
+    .dashboard-sidebar {
+      width: 100%;
+      position: static;
+
+      &.collapsed {
+        display: none;
+      }
+    }
+
+    .sidebar-toggle {
+      display: flex;
+    }
+  }
+
+  /* Dashboard data list styles */
+  .dashboard-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-3;
+  }
+
+  .dashboard-list-item {
+    padding: $spacing-4;
+    border-radius: $radius-xl;
+    border: 1px solid $color-border;
+    background-color: $color-bg-card;
+    transition: $transition-base;
+
+    &:hover {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+  }
+
+  .item-actions {
+    display: flex;
+    gap: $spacing-2;
+    margin-top: $spacing-3;
+  }
+
+  .action-btn {
+    padding: $spacing-1 $spacing-3;
+    border-radius: $radius-md;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &.delete {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+
+      &:hover {
+        background-color: rgba(239, 68, 68, 0.2);
+      }
+    }
+
+    &.reopen {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+
+      &:hover {
+        background-color: rgba(16, 185, 129, 0.2);
+      }
+    }
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 2px $spacing-2;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: 600;
+
+    &.open {
+      background-color: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    &.closed {
+      background-color: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    &.pending {
+      background-color: rgba(245, 158, 11, 0.12);
+      color: #f59e0b;
+    }
+
+    &.accepted {
+      background-color: rgba(16, 185, 129, 0.12);
+      color: #10b981;
+    }
+
+    &.rejected {
+      background-color: rgba(239, 68, 68, 0.12);
+      color: #ef4444;
+    }
+
+    &.completed {
+      background-color: rgba(99, 102, 241, 0.12);
+      color: #6366f1;
+    }
+  }
+
+  /* ========== Phase 11: Legal Acts Improvement ========== */
+
+  .filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-3;
+    align-items: center;
+    margin-bottom: $spacing-8;
+  }
+
+  .filter-bar .input {
+    flex: 1;
+    min-width: 200px;
+    max-width: 400px;
+  }
+
+  .filter-select {
+    padding: $spacing-2 $spacing-3;
+    border-radius: $radius-lg;
+    border: 1px solid $color-border;
+    background-color: $color-bg-input;
+    color: $color-text-main;
+    font-size: $font-size-sm;
+    transition: $transition-base;
+    cursor: pointer;
+    min-width: 180px;
+
+    &:focus {
+      border-color: $color-primary;
+      outline: none;
+      box-shadow: 0 0 0 1px $color-primary;
+    }
+  }
+
+  .category-badge {
+    display: inline-block;
+    padding: 2px $spacing-2;
+    border-radius: $radius-full;
+    font-size: $font-size-xs;
+    font-weight: 600;
+    background-color: rgba(99, 102, 241, 0.1);
+    color: #6366f1;
+
+    &.criminal {
+      background-color: rgba(239, 68, 68, 0.1);
+      color: #ef4444;
+    }
+
+    &.civil {
+      background-color: rgba(59, 130, 246, 0.1);
+      color: #3b82f6;
+    }
+
+    &.constitutional {
+      background-color: rgba(168, 85, 247, 0.1);
+      color: #a855f7;
+    }
+
+    &.family {
+      background-color: rgba(236, 72, 153, 0.1);
+      color: #ec4899;
+    }
+
+    &.labour {
+      background-color: rgba(245, 158, 11, 0.1);
+      color: #f59e0b;
+    }
+
+    &.property {
+      background-color: rgba(16, 185, 129, 0.1);
+      color: #10b981;
+    }
+
+    &.tax {
+      background-color: rgba(20, 184, 166, 0.1);
+      color: #14b8a6;
+    }
+
+    &.corporate {
+      background-color: rgba(99, 102, 241, 0.1);
+      color: #6366f1;
+    }
+
+    &.environmental {
+      background-color: rgba(34, 197, 94, 0.1);
+      color: #22c55e;
+    }
+
+    &.other {
+      background-color: rgba(148, 163, 184, 0.1);
+      color: #94a3b8;
+    }
+  }
+
+  .collapsible-section {
+    border: 1px solid $color-border;
+    border-radius: $radius-lg;
+    overflow: hidden;
+    transition: $transition-base;
+
+    &:hover {
+      border-color: rgba(99, 102, 241, 0.4);
+    }
+  }
+
+  .collapsible-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: $spacing-4;
+    cursor: pointer;
+    background-color: transparent;
+    border: none;
+    width: 100%;
+    text-align: left;
+    color: $color-text-main;
+    font-size: $font-size-sm;
+    transition: $transition-base;
+
+    &:hover {
+      background-color: rgba(99, 102, 241, 0.04);
+    }
+  }
+
+  .collapsible-arrow {
+    transition: transform 0.2s ease;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+
+    &.expanded {
+      transform: rotate(90deg);
+    }
+  }
+
+  .collapsible-body {
+    padding: 0 $spacing-4 $spacing-4;
+    color: $color-text-muted;
+    font-size: $font-size-sm;
+    line-height: 1.7;
+    white-space: pre-line;
+  }
+
+  .section-toggle-bar {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: $spacing-3;
+  }
+
+  .toggle-all-btn {
+    padding: $spacing-1 $spacing-3;
+    border-radius: $radius-md;
+    border: 1px solid $color-border;
+    background: transparent;
+    color: $color-text-muted;
+    font-size: $font-size-xs;
+    font-weight: 500;
+    cursor: pointer;
+    transition: $transition-base;
+
+    &:hover {
+      border-color: #6366f1;
+      color: #6366f1;
+    }
+  }
+
+  mark.search-highlight {
+    background-color: rgba(245, 158, 11, 0.3);
+    color: inherit;
+    padding: 0 2px;
+    border-radius: 2px;
+  }
+
+  /* ========== Phase 12: UX Polish & Animations ========== */
+
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes slideInRight {
+    from {
+      opacity: 0;
+      transform: translateX(40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes slideInLeft {
+    from {
+      opacity: 0;
+      transform: translateX(-40px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes shake {
+
+    0%,
+    100% {
+      transform: translateX(0);
+    }
+
+    20%,
+    60% {
+      transform: translateX(-4px);
+    }
+
+    40%,
+    80% {
+      transform: translateX(4px);
+    }
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes shimmer {
+    0% {
+      background-position: -200% 0;
+    }
+
+    100% {
+      background-position: 200% 0;
+    }
+  }
+
+  /* Utility Classes */
+  .page-transition {
+    animation: fadeInUp 0.5s ease-out forwards;
+  }
+
+  .step-forward {
+    animation: slideInRight 0.4s ease-out forwards;
+  }
+
+  .step-backward {
+    animation: slideInLeft 0.4s ease-out forwards;
+  }
+
+  .field-error {
+    animation: shake 0.4s ease-in-out;
+    border-color: $color-danger !important;
+  }
+
+  /* Spinner Component Styles */
+  .spinner {
+    display: inline-block;
+    border: 2px solid rgba($color-primary-light, 0.2);
+    border-top-color: currentColor;
+    border-radius: 50%;
+    animation: spin 0.6s linear infinite;
+
+    &.sm {
+      width: 1rem;
+      height: 1rem;
+      border-width: 2px;
+    }
+
+    &.md {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-width: 2px;
+    }
+
+    &.lg {
+      width: 2.5rem;
+      height: 2.5rem;
+      border-width: 3px;
+    }
+  }
+
+  /* Skeleton Loader Styles */
+  .skeleton {
+    background: linear-gradient(90deg,
+        rgba($color-text-muted, 0.05) 25%,
+        rgba($color-text-muted, 0.1) 50%,
+        rgba($color-text-muted, 0.05) 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite linear;
+    border-radius: $radius-md;
+  }
+
+  /* Enhanced Hover Effects */
+  .card-hover-effect {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+      border-color: rgba($color-primary, 0.3);
+    }
+  }
+
+  /* Glassmorphism & Animations */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.7) !important;
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+    border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  }
+
+  .dark .glass-card {
+    background: rgba(15, 23, 42, 0.6) !important;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .hero-gradient-text {
+    background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  @keyframes drift {
+    0% {
+      transform: translate(0, 0);
+    }
+
+    50% {
+      transform: translate(30px, -20px);
+    }
+
+    100% {
+      transform: translate(0, 0);
+    }
+  }
+
+  @keyframes glow {
+
+    0%,
+    100% {
+      opacity: 0.3;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.6;
+      transform: scale(1.1);
+    }
+  }
+
+  .animate-drift {
+    animation: drift 15s ease-in-out infinite;
+  }
+
+  .animate-glow {
+    animation: glow 8s ease-in-out infinite;
+  }
+
+  /* Dark mode layout fixes */
+  footer {
+    background-color: var(--color-bg-card);
+    border-color: var(--color-border);
+    color: var(--color-text-muted);
+  }
+}
