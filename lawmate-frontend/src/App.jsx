@@ -1,4 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { useAuth } from './context/AuthContext';
 import Layout from './components/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -41,103 +42,116 @@ const DashboardSwitcher = () => {
 
 function App() {
   return (
-    <Layout>
-      <Routes>
-        {/* Public Routes */}
-        <Route path="/" element={<Home />} />
+    <>
+      <Toaster 
+        position="bottom-left"
+        toastOptions={{
+          duration: 4000,
+          style: {
+            background: 'var(--color-bg-card)',
+            color: 'var(--color-text-main)',
+            border: '1px solid var(--color-border)',
+          },
+        }}
+      />
+      <Layout>
+        <Routes>
+          {/* Public Routes */}
+          <Route path="/" element={<Home />} />
 
-        <Route
-          path="/login"
-          element={
-            <PublicRoute>
-              <Login />
-            </PublicRoute>
-          }
-        />
+          <Route
+            path="/login"
+            element={
+              <PublicRoute>
+                <Login />
+              </PublicRoute>
+            }
+          />
 
-        <Route
-          path="/register"
-          element={
-            <PublicRoute>
-              <Register />
-            </PublicRoute>
-          }
-        />
+          <Route
+            path="/register"
+            element={
+              <PublicRoute>
+                <Register />
+              </PublicRoute>
+            }
+          />
 
-        <Route path="/legal-acts" element={<LegalActs />} />
-        <Route path="/legal-acts/:id" element={<LegalActDetail />} />
+          <Route path="/legal-acts" element={<LegalActs />} />
+          <Route path="/legal-acts/:id" element={<LegalActDetail />} />
 
-        {/* Protected Dashboard - Shared Route, Role-Based Content */}
-        <Route
-          path="/dashboard"
-          element={
-            <ProtectedRoute>
-              <DashboardSwitcher />
-            </ProtectedRoute>
-          }
-        />
+          {/* Protected Dashboard - Shared Route, Role-Based Content */}
+          <Route
+            path="/dashboard"
+            element={
+              <ProtectedRoute>
+                <DashboardSwitcher />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Consumer Features */}
-        <Route
-          path="/legal-query"
-          element={
-            <ProtectedRoute role="user">
-              <LegalQuery />
-            </ProtectedRoute>
-          }
-        />
+          {/* Consumer Features */}
+          <Route
+            path="/legal-query"
+            element={
+              <ProtectedRoute role="user">
+                <LegalQuery />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/resolve"
-          element={
-            <ProtectedRoute role="user">
-               <QueryResolver />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/resolve"
+            element={
+              <ProtectedRoute role="user">
+                 <QueryResolver />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/advocates"
-          element={
-            <ProtectedRoute role="user">
-              <Advocates />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/advocates"
+            element={
+              <ProtectedRoute role="user">
+                <Advocates />
+              </ProtectedRoute>
+            }
+          />
 
-        <Route
-          path="/document-generator"
-          element={
-            <ProtectedRoute role="user">
-              <DocumentGenerator />
-            </ProtectedRoute>
-          }
-        />
+          <Route
+            path="/document-generator"
+            element={
+              <ProtectedRoute role="user">
+                <DocumentGenerator />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Provider Features */}
-        <Route
-          path="/advocate-profile"
-          element={
-            <ProtectedRoute role="advocate">
-              <AdvocateProfile />
-            </ProtectedRoute>
-          }
-        />
+          {/* Provider Features */}
+          <Route
+            path="/advocate-profile"
+            element={
+              <ProtectedRoute role="advocate">
+                <AdvocateProfile />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Shared Protected Routes */}
-        <Route
-          path="/bookings"
-          element={
-            <ProtectedRoute>
-              <Bookings />
-            </ProtectedRoute>
-          }
-        />
+          {/* Shared Protected Routes */}
+          <Route
+            path="/bookings"
+            element={
+              <ProtectedRoute>
+                <Bookings />
+              </ProtectedRoute>
+            }
+          />
 
-        {/* Fallback */}
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Layout>
+          {/* Fallback */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Layout>
+    </>
   );
 }
 

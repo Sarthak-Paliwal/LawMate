@@ -1,17 +1,55 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
+import toast from 'react-hot-toast';
 
 const BASE_URL = import.meta.env.VITE_API_URL || '/api';
 
+const baseQuery = fetchBaseQuery({
+  baseUrl: BASE_URL,
+  prepareHeaders: (headers) => {
+    const token = localStorage.getItem('lawmate-token');
+    if (token) headers.set('Authorization', `Bearer ${token}`);
+    return headers;
+  },
+});
+
+const baseQueryWithReauth = async (args, api, extraOptions) => {
+  let result = await baseQuery(args, api, extraOptions);
+
+  if (result.error) {
+    const status = result.error.status;
+    const data = result.error.data;
+    
+    // Determine the URL being called
+    const url = typeof args === 'string' ? args : args.url;
+
+    // Suppress toasts for the initial /auth/me check if not authorized yet
+    if (status === 401 && url === '/auth/me') {
+      // Do nothing gracefully
+    } else if (data && data.message) {
+      // Backend sent a specific error message meant for the user
+      toast.error(data.message);
+    } else if (status === 401) {
+      toast.error('Session expired or invalid credentials.');
+    } else if (status === 403) {
+      toast.error('You do not have permission to perform this action.');
+    } else if (status === 404) {
+      toast.error('Resource not found.');
+      console.error('API 404:', url); // useful for dev
+    } else if (status >= 500) {
+      toast.error('Server error. Please try again later.');
+    } else if (status === 'FETCH_ERROR') {
+      toast.error('Network error. Check your connection.');
+    } else {
+      toast.error('An unexpected error occurred.');
+    }
+  }
+
+  return result;
+};
+
 export const lawmateApi = createApi({
   reducerPath: 'lawmateApi',
-  baseQuery: fetchBaseQuery({
-    baseUrl: BASE_URL,
-    prepareHeaders: (headers) => {
-      const token = localStorage.getItem('lawmate-token');
-      if (token) headers.set('Authorization', `Bearer ${token}`);
-      return headers;
-    },
-  }),
+  baseQuery: baseQueryWithReauth,
 
   tagTypes: ['Me', 'AdvocateProfile', 'AdvocateList', 'Bookings', 'Queries', 'Documents', 'LegalActs', 'AdminPending'],
 
@@ -47,6 +85,28 @@ export const lawmateApi = createApi({
       query: (formData) => ({ url: '/auth/upload-id-proof', method: 'POST', body: formData }),
       transformResponse: (res) => res.data,
       invalidatesTags: ['Me'],
+    }),
+
+    verifyOTP: builder.mutation({
+      query: (body) => ({ url: '/auth/verify-otp', method: 'POST', body }),
+      transformResponse: (res) => res.data,
+      invalidatesTags: ['Me', 'AdvocateProfile'],
+    }),
+
+    resendOTP: builder.mutation({
+      query: (body) => ({ url: '/auth/resend-otp', method: 'POST', body }),
+      transformResponse: (res) => res.data,
+    }),
+
+    sendMobileOTP: builder.mutation({
+      query: (body) => ({ url: '/auth/send-mobile-otp', method: 'POST', body }),
+      transformResponse: (res) => res.data,
+    }),
+
+    verifyMobileOTP: builder.mutation({
+      query: (body) => ({ url: '/auth/verify-mobile-otp', method: 'POST', body }),
+      transformResponse: (res) => res.data,
+      invalidatesTags: ['Me', 'AdvocateProfile'],
     }),
 
     /* ───────── Advocate Profile ───────── */
@@ -206,6 +266,10 @@ export const {
   useRegisterMutation,
   useUploadProfileImageMutation,
   useUploadIdProofMutation,
+  useVerifyOTPMutation,
+  useResendOTPMutation,
+  useSendMobileOTPMutation,
+  useVerifyMobileOTPMutation,
   // Advocate profile
   useGetMyAdvocateProfileQuery,
   useUpdateAdvocateProfileMutation,

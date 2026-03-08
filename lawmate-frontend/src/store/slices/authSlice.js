@@ -54,13 +54,26 @@ const authSlice = createSlice({
       }
     );
 
-    // When register mutation succeeds → same
+    // When verifyOTP or verifyMobileOTP succeeds → token is provided only if FULLY verified
     builder.addMatcher(
-      lawmateApi.endpoints.register.matchFulfilled,
+      lawmateApi.endpoints.verifyOTP.matchFulfilled,
       (state, { payload }) => {
-        state.token = payload.token;
-        state.user = payload.user;
-        localStorage.setItem('lawmate-token', payload.token);
+        if (payload.token) {
+          state.token = payload.token;
+          state.user = payload.user;
+          localStorage.setItem('lawmate-token', payload.token);
+        }
+      }
+    );
+
+    builder.addMatcher(
+      lawmateApi.endpoints.verifyMobileOTP.matchFulfilled,
+      (state, { payload }) => {
+        if (payload.token) {
+          state.token = payload.token;
+          state.user = payload.user;
+          localStorage.setItem('lawmate-token', payload.token);
+        }
       }
     );
 

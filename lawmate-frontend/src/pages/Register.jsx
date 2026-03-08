@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../i18n/LanguageContext';
+import { useVerifyOTPMutation, useResendOTPMutation, useSendMobileOTPMutation } from '../store/services/lawmateApi';
+import toast from 'react-hot-toast';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 
@@ -10,6 +12,7 @@ export default function Register() {
     name: '',
     email: '',
     password: '',
+    confirmPassword: '',
     role: 'user',
     phone: '',
     barCouncilId: '',
@@ -17,9 +20,14 @@ export default function Register() {
     stateBarCouncil: ''
   });
 
-  const [error, setError] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
+  
+  // OTP Verification State
+  const [step, setStep] = useState(1);
+  const [emailOtp, setEmailOtp] = useState('');
+  const [verifyOTP, { isLoading: verifyingEmail }] = useVerifyOTPMutation();
+  const [resendOTP, { isLoading: resendingEmail }] = useResendOTPMutation();
 
   const { register } = useAuth();
   const { t } = useLanguage();
@@ -29,10 +37,14 @@ export default function Register() {
     const errors = {};
     if (!form.name) errors.name = t('nameRequired') || 'Name is required';
     if (!form.email) errors.email = t('emailRequired') || 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(form.email)) errors.email = t('emailInvalid') || 'Email is invalid';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = t('emailInvalid') || 'Email is invalid';
     
     if (!form.password) errors.password = t('passwordRequired') || 'Password is required';
     else if (form.password.length < 6) errors.password = t('passwordTooShort') || 'Password must be at least 6 characters';
+    
+    if (form.password !== form.confirmPassword) errors.confirmPassword = 'Passwords do not match';
+
+    if (form.phone && !/^\d{10}$/.test(form.phone)) errors.phone = 'Phone number must be 10 digits';
     
     if (form.role === 'advocate') {
       if (!form.barCouncilId) errors.barCouncilId = 'Bar Council ID is required';
@@ -46,7 +58,6 @@ export default function Register() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
     
     if (!validate()) return;
     
@@ -54,12 +65,41 @@ export default function Register() {
 
     try {
       await register(form);
-      navigate('/', { replace: true });
+      // Move to OTP step on success
+      setStep(2);
+      toast.success('Registration successful! Please check your email for the OTP.');
     } catch (err) {
-      setError(err.response?.data?.message || t('errorGeneric'));
+      // API errors are handled globally by RTK Query baseQueryWithReauth
     } finally {
       setSubmitting(false);
     }
+  };
+
+  const handleVerifyOTP = async (e) => {
+    e.preventDefault();
+    if (!emailOtp || emailOtp.length !== 6) {
+      toast.error('Please enter a valid 6-digit Email OTP');
+      return;
+    }
+    try {
+      // Execute email verification
+      await verifyOTP({ 
+        email: form.email, 
+        otp: emailOtp
+      }).unwrap();
+
+      toast.success('Account verified successfully!');
+      navigate('/', { replace: true });
+    } catch (err) {
+      // Errors handled globally by RTK query
+    }
+  };
+
+  const handleResendOTP = async () => {
+    try {
+      await resendOTP({ email: form.email }).unwrap();
+      toast.success('A new email OTP has been sent.');
+    } catch (err) {}
   };
 
   return (
@@ -72,20 +112,16 @@ export default function Register() {
       <div className="relative w-full max-w-md card shadow-sm p-8">
 
         <h2 className="text-2xl font-semibold text-default mb-2">
-          {t('register')}
+          {step === 1 ? t('register') : 'Verify Your Email'}
         </h2>
 
         <p className="text-sm text-muted mb-6">
-          Create your LawMate account.
+          {step === 1 ? 'Create your LawMate account.' : `We sent a 6-digit code to ${form.email}`}
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
+        {step === 1 ? (
 
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-2 rounded-md animate-in fade-in zoom-in duration-300">
-              {error}
-            </div>
-          )}
+        <form onSubmit={handleSubmit} className="space-y-4">
 
           <Input
             label={t('name')}
@@ -125,12 +161,26 @@ export default function Register() {
           />
 
           <Input
+            label="Confirm Password"
+            type="password"
+            value={form.confirmPassword}
+            onChange={(e) =>
+              setForm((f) => ({ ...f, confirmPassword: e.target.value }))
+            }
+            error={fieldErrors.confirmPassword}
+            className={fieldErrors.confirmPassword ? 'field-error' : ''}
+            required
+          />
+
+          <Input
             label={t('phone')}
             type="tel"
             value={form.phone}
             onChange={(e) =>
               setForm((f) => ({ ...f, phone: e.target.value }))
             }
+            error={fieldErrors.phone}
+            className={fieldErrors.phone ? 'field-error' : ''}
           />
 
           {/* Role Selector */}
@@ -194,24 +244,60 @@ export default function Register() {
             </div>
           )}
 
-          <Button
-            type="submit"
-            loading={submitting}
-            className="w-full !mt-6"
-          >
-            {t('register')}
-          </Button>
-        </form>
+            <Button
+              type="submit"
+              loading={submitting}
+              className="w-full !mt-6"
+            >
+              {t('register')}
+            </Button>
+          </form>
+        ) : (
+          <form onSubmit={handleVerifyOTP} className="space-y-6">
+            <div>
+              <Input
+                label="Email OTP (6-Digit)"
+                type="text"
+                placeholder="e.g. 123456"
+                maxLength={6}
+                value={emailOtp}
+                onChange={(e) => setEmailOtp(e.target.value)}
+                className="text-center text-xl tracking-widest"
+                required
+              />
+              <div className="text-right mt-1">
+                <button
+                  type="button"
+                  onClick={handleResendOTP}
+                  disabled={resendingEmail}
+                  className="text-indigo-600 hover:text-indigo-700 text-xs font-medium disabled:opacity-50"
+                >
+                  {resendingEmail ? 'Resending...' : 'Resend Email Code'}
+                </button>
+              </div>
+            </div>
+            
+            <Button
+              type="submit"
+              loading={verifyingEmail}
+              className="w-full !mt-8"
+            >
+              Verify & Complete Sign Up
+            </Button>
+          </form>
+        )}
 
-        <p className="mt-6 text-sm text-muted text-center">
-          {t('alreadyHaveAccount')}{' '}
-          <Link
-            to="/login"
-            className="text-indigo-600 hover:text-indigo-700 font-medium"
-          >
-            {t('login')}
-          </Link>
-        </p>
+        {step === 1 && (
+          <p className="mt-6 text-sm text-muted text-center">
+            {t('alreadyHaveAccount')}{' '}
+            <Link
+              to="/login"
+              className="text-indigo-600 hover:text-indigo-700 font-medium"
+            >
+              {t('login')}
+            </Link>
+          </p>
+        )}
       </div>
     </div>
   );

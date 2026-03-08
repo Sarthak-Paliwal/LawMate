@@ -5,7 +5,7 @@ exports.getPendingAdvocates = async (req, res, next) => {
   try {
     const pendingAdvocates = await User.find({
       role: 'advocate',
-      isVerified: false
+      isAdvocateVerified: false
     }).select('-password');
 
     res.status(200).json({
@@ -34,7 +34,7 @@ exports.verifyAdvocate = async (req, res, next) => {
     }
 
     if (action === 'approve') {
-      advocate.isVerified = true;
+      advocate.isAdvocateVerified = true;
       await advocate.save({ validateBeforeSave: false }); // Bypass password validation
       
       return res.status(200).json({

@@ -26,12 +26,12 @@ exports.list = async (filters = {}) => {
   let profiles = await AdvocateProfile.find(profileFilter)
     .populate({
       path: 'user',
-      select: 'name email phone isVerified',
-      match: { isVerified: true }
+      select: 'name email phone isAdvocateVerified',
+      match: { isAdvocateVerified: true }
     })
     .lean();
 
-  // Remove profiles where the user doesn't match `isVerified: true` (which populate sets to null)
+  // Remove profiles where the user doesn't match `isAdvocateVerified: true` (which populate sets to null)
   profiles = profiles.filter(p => p.user !== null);
 
   // Smart Ranking Logic

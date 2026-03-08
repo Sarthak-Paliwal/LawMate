@@ -31,6 +31,8 @@ const errorHandler = (err, req, res, next) => {
   res.status(statusCode).json({
     status: statusCode >= 500 ? "error" : "fail",
     message,
+    ...(err.needsEmailVerification !== undefined && { needsEmailVerification: err.needsEmailVerification }),
+    ...(err.needsPhoneVerification !== undefined && { needsPhoneVerification: err.needsPhoneVerification }),
     ...(process.env.NODE_ENV === "development" && { stack: err.stack })
   });
 };

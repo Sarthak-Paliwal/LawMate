@@ -35,14 +35,23 @@ const userSchema = new mongoose.Schema({
   enrollmentYear: { type: Number },
   stateBarCouncil: { type: String, trim: true },
   idProofDocumentUrl: { type: String },
-  isVerified: { 
+  isEmailVerified: { 
     type: Boolean, 
-    default: function() {
-      // By default, regular users are considered "verified" since they don't need approval
-      // Advocates need manual approval, so they default to false
-      return this.role === 'user'; 
-    }
+    default: false // Everyone needs to verify their email
   },
+  isAdvocateVerified: {
+    type: Boolean,
+    default: false // Advocates must be manually verified by admins
+  },
+  isPhoneVerified: {
+    type: Boolean,
+    default: false
+  },
+  
+  // OTP Verification Fields
+  otp: { type: String, select: false },
+  otpExpiresAt: { type: Date, select: false },
+
 
 }, { timestamps: true });
 

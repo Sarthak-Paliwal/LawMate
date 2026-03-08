@@ -14,6 +14,15 @@ exports.register = async (req, res, next) => {
       });
     }
 
+    if (role === 'advocate') {
+      if (!barCouncilId || !enrollmentYear || !stateBarCouncil) {
+        return res.status(400).json({
+          status: "fail",
+          message: "Advocate details (Bar Council ID, Enrollment Year, State Bar Council) are required"
+        });
+      }
+    }
+
     const result = await authService.register({ 
       name, email, password, role, phone, barCouncilId, enrollmentYear, stateBarCouncil 
     });
@@ -131,3 +140,53 @@ exports.uploadIdProof = async (req, res, next) => {
     next(err);
   }
 };
+
+/* -------------------- OTP Verification -------------------- */
+
+exports.verifyOTP = async (req, res, next) => {
+  try {
+    const { email, otp } = req.body;
+
+    if (!email || !otp) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Email and Email OTP are required"
+      });
+    }
+
+    const result = await authService.verifyRegistrationOTPs(email, otp);
+
+    res.status(200).json({
+      status: "success",
+      data: result
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+exports.resendOTP = async (req, res, next) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Email is required"
+      });
+    }
+
+    const result = await authService.resendOTP(email);
+
+    res.status(200).json({
+      status: "success",
+      message: result.message
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+

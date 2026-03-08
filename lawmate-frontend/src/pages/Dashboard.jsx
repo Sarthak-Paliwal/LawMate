@@ -11,6 +11,7 @@ import {
   useUploadProfileImageMutation,
   useUploadIdProofMutation,
 } from '../store/services/lawmateApi';
+import toast from 'react-hot-toast';
 import Skeleton from '../components/common/Skeleton';
 import DashboardSidebar from '../components/DashboardSidebar';
 import Card from '../components/common/Card';
@@ -196,13 +197,15 @@ export default function Dashboard() {
             <p className="text-[10px] text-muted mt-2">Max file size: 5 MB. Accepted: JPG, PNG, WebP.</p>
           </div>
 
+
+
           {/* Advocate Verification Section */}
           {user?.role === 'advocate' && (
             <div className="border-t border-slate-100 dark:border-slate-800 pt-6 mt-6">
               <div className="flex items-center justify-between mb-3">
                 <p className="text-sm font-semibold text-default">{t('advocateVerification')}</p>
-                <div className={`px-3 py-1 text-[10px] rounded-full font-bold uppercase tracking-wider ${user?.isVerified ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-amber-50 text-amber-600 border border-amber-200'}`}>
-                  {user?.isVerified ? 'Verified' : 'Pending Verification'}
+                <div className={`px-3 py-1 text-[10px] rounded-full font-bold uppercase tracking-wider ${user?.isAdvocateVerified ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-amber-50 text-amber-600 border border-amber-200'}`}>
+                  {user?.isAdvocateVerified ? 'Verified' : 'Pending Verification'}
                 </div>
               </div>
 

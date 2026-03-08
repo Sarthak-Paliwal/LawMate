@@ -2,16 +2,16 @@ import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { useLanguage } from '../i18n/LanguageContext';
+import toast from 'react-hot-toast';
 import Button from '../components/common/Button';
 import Input from '../components/common/Input';
 
 export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [error, setError] = useState('');
   const [fieldErrors, setFieldErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
-
+  
   const { login } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ export default function Login() {
   const validate = () => {
     const errors = {};
     if (!email) errors.email = t('emailRequired') || 'Email is required';
-    else if (!/\S+@\S+\.\S+/.test(email)) errors.email = t('emailInvalid') || 'Email is invalid';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = t('emailInvalid') || 'Email is invalid';
     
     if (!password) errors.password = t('passwordRequired') || 'Password is required';
     else if (password.length < 6) errors.password = t('passwordTooShort') || 'Password must be at least 6 characters';
@@ -32,17 +32,16 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError('');
-    
     if (!validate()) return;
-    
     setSubmitting(true);
 
     try {
       await login(email, password);
       navigate(from, { replace: true });
     } catch (err) {
-      setError(err.response?.data?.message || t('errorGeneric'));
+      if (err.status === 403 && err.data?.message?.includes('verify')) {
+        toast.error('Account not fully verified. Please refer to your registration confirmation.');
+      }
     } finally {
       setSubmitting(false);
     }
@@ -66,13 +65,6 @@ export default function Login() {
         </p>
 
         <form onSubmit={handleSubmit} className="space-y-5">
-
-          {error && (
-            <div className="bg-red-50 border border-red-200 text-red-600 text-sm px-4 py-2 rounded-md animate-in fade-in zoom-in duration-300">
-              {error}
-            </div>
-          )}
-
           <Input
             label={t('email')}
             type="email"

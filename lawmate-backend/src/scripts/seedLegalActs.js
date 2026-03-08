@@ -36,25 +36,25 @@ const acts = [
     ]
   },
   {
-      name: "Protection of Civil Rights Act", shortName: "PCR Act", year: 1955, category: "Constitution",
-      description: "Prescribes punishment for the preaching and practice of 'Untouchability'.",
-      sections: [
-          { number: "3", title: "Punishment for enforcing religious disabilities", content: "Whoever on the ground of untouchability prevents any person from entering, worshipping, or offering prayers in any place of public worship, or from bathing in or using any sacred tank, well, spring, or watercourse, shall be punishable with imprisonment of 1-6 months and fine of ₹100-₹500. Second and subsequent offences: imprisonment of 6 months-2 years and fine of ₹200-₹1,000." },
-          { number: "4", title: "Punishment for enforcing social disabilities", content: "Whoever on the ground of untouchability enforces any disability with regard to: (a) access to any shop, public restaurant, hotel, public entertainment venue; (b) use of utensils or articles kept in such places; (c) practice of any profession or occupation; (d) use of water sources, bathing ghats, roads, places of public resort  -  shall be punishable with imprisonment of 1-6 months and fine of ₹100-₹500." }
-      ]
+    name: "Protection of Civil Rights Act", shortName: "PCR Act", year: 1955, category: "Constitution",
+    description: "Prescribes punishment for the preaching and practice of 'Untouchability'.",
+    sections: [
+      { number: "3", title: "Punishment for enforcing religious disabilities", content: "Whoever on the ground of untouchability prevents any person from entering, worshipping, or offering prayers in any place of public worship, or from bathing in or using any sacred tank, well, spring, or watercourse, shall be punishable with imprisonment of 1-6 months and fine of ₹100-₹500. Second and subsequent offences: imprisonment of 6 months-2 years and fine of ₹200-₹1,000." },
+      { number: "4", title: "Punishment for enforcing social disabilities", content: "Whoever on the ground of untouchability enforces any disability with regard to: (a) access to any shop, public restaurant, hotel, public entertainment venue; (b) use of utensils or articles kept in such places; (c) practice of any profession or occupation; (d) use of water sources, bathing ghats, roads, places of public resort  -  shall be punishable with imprisonment of 1-6 months and fine of ₹100-₹500." }
+    ]
   },
   {
-      name: "Representation of the People Act", shortName: "RPA", year: 1951, category: "Constitution",
-      description: "Code for the conduct of elections to the Houses of Parliament and State Legislatures.",
-      sections: [
-          { number: "8", title: "Disqualification on conviction", content: "A person convicted of any offence and sentenced to imprisonment for not less than 2 years shall be disqualified from the date of conviction and shall continue to be disqualified for a further period of 6 years from the date of release. A person convicted under NDPS Act, Prevention of Corruption Act, Protection of Civil Rights Act, UAPA, or RP Act provisions on corrupt practices is disqualified even if imprisonment is less than 2 years." },
-          { number: "123", title: "Corrupt practices", content: "Corrupt practices include: (a) bribery  -  any gift, offer, or promise to any person to stand/withdraw as candidate or to vote/refrain from voting; (b) undue influence  -  interference or threat to a candidate or voter; (c) appeal to vote on grounds of religion, race, caste, community, or language; (d) promotion of feelings of enmity between classes; (e) publication of false statements about personal character of a candidate; (f) hiring vehicles for transporting voters; (g) booth capturing. An election can be declared void if corrupt practices are proved." }
-      ]
+    name: "Representation of the People Act", shortName: "RPA", year: 1951, category: "Constitution",
+    description: "Code for the conduct of elections to the Houses of Parliament and State Legislatures.",
+    sections: [
+      { number: "8", title: "Disqualification on conviction", content: "A person convicted of any offence and sentenced to imprisonment for not less than 2 years shall be disqualified from the date of conviction and shall continue to be disqualified for a further period of 6 years from the date of release. A person convicted under NDPS Act, Prevention of Corruption Act, Protection of Civil Rights Act, UAPA, or RP Act provisions on corrupt practices is disqualified even if imprisonment is less than 2 years." },
+      { number: "123", title: "Corrupt practices", content: "Corrupt practices include: (a) bribery  -  any gift, offer, or promise to any person to stand/withdraw as candidate or to vote/refrain from voting; (b) undue influence  -  interference or threat to a candidate or voter; (c) appeal to vote on grounds of religion, race, caste, community, or language; (d) promotion of feelings of enmity between classes; (e) publication of false statements about personal character of a candidate; (f) hiring vehicles for transporting voters; (g) booth capturing. An election can be declared void if corrupt practices are proved." }
+    ]
   },
   {
-      name: "Official Languages Act", shortName: "OLA", year: 1963, category: "Constitution",
-      description: "Provisions for languages used for official purposes of the Union.",
-      sections: [{ number: "3", title: "Continuation of English Language", content: "Notwithstanding the expiration of the 15-year period from the commencement of the Constitution, the English language may continue to be used, in addition to Hindi, for all official purposes of the Union and for transaction of business in Parliament. This was enacted to address concerns of non-Hindi-speaking states. Both Hindi and English versions of Bills, Acts, and ordinances are authoritative." }]
+    name: "Official Languages Act", shortName: "OLA", year: 1963, category: "Constitution",
+    description: "Provisions for languages used for official purposes of the Union.",
+    sections: [{ number: "3", title: "Continuation of English Language", content: "Notwithstanding the expiration of the 15-year period from the commencement of the Constitution, the English language may continue to be used, in addition to Hindi, for all official purposes of the Union and for transaction of business in Parliament. This was enacted to address concerns of non-Hindi-speaking states. Both Hindi and English versions of Bills, Acts, and ordinances are authoritative." }]
   },
 
   // --- Criminal Defense (5) ---
@@ -86,22 +86,22 @@ const acts = [
     ]
   },
   {
-      name: "Indian Evidence Act", shortName: "Evidence Act", year: 1872, category: "Criminal Defense",
-      description: "Rules governing the admissibility and weight of evidence in judicial proceedings.",
-      sections: [
-          { number: "24", title: "Confession caused by inducement", content: "A confession made by an accused person is irrelevant in criminal proceedings if it appears to the court that it was caused by any inducement, threat, or promise from a person in authority, and sufficient in the opinion of the court to give the accused grounds to suppose he would gain any advantage or avoid any evil. The inducement must relate to the charge against the accused. However, a confession made after the impression caused by inducement has been fully removed is admissible." },
-          { number: "25", title: "Confession to police officer", content: "No confession made to a police officer shall be proved as against a person accused of any offence. This is a fundamental protection against police coercion. However, under Section 27, if a fact is discovered based on information received from the accused while in police custody, so much of the information as relates distinctly to the fact discovered may be proved (e.g., recovery of weapon). Confessions recorded before a Magistrate (Section 164 CrPC) are admissible." }
-      ]
+    name: "Indian Evidence Act", shortName: "Evidence Act", year: 1872, category: "Criminal Defense",
+    description: "Rules governing the admissibility and weight of evidence in judicial proceedings.",
+    sections: [
+      { number: "24", title: "Confession caused by inducement", content: "A confession made by an accused person is irrelevant in criminal proceedings if it appears to the court that it was caused by any inducement, threat, or promise from a person in authority, and sufficient in the opinion of the court to give the accused grounds to suppose he would gain any advantage or avoid any evil. The inducement must relate to the charge against the accused. However, a confession made after the impression caused by inducement has been fully removed is admissible." },
+      { number: "25", title: "Confession to police officer", content: "No confession made to a police officer shall be proved as against a person accused of any offence. This is a fundamental protection against police coercion. However, under Section 27, if a fact is discovered based on information received from the accused while in police custody, so much of the information as relates distinctly to the fact discovered may be proved (e.g., recovery of weapon). Confessions recorded before a Magistrate (Section 164 CrPC) are admissible." }
+    ]
   },
   {
-      name: "Arms Act", shortName: "Arms Act", year: 1959, category: "Criminal Defense",
-      description: "Law relating to arms and ammunition.",
-      sections: [{ number: "3", title: "Licence for firearms", content: "No person shall acquire, have in his possession, or carry any firearm or ammunition unless he holds a licence issued in accordance with the provisions of this Act. Licence is granted by the District Magistrate. A non-prohibited bore (NPB) licence is for personal safety; prohibited bore (PB) requires special approval. Possession without licence: imprisonment of 1-3 years and fine for NPB weapons; 3-7 years for PB weapons. The 2019 Amendment reduced the number of firearms per licence from 3 to 2." }]
+    name: "Arms Act", shortName: "Arms Act", year: 1959, category: "Criminal Defense",
+    description: "Law relating to arms and ammunition.",
+    sections: [{ number: "3", title: "Licence for firearms", content: "No person shall acquire, have in his possession, or carry any firearm or ammunition unless he holds a licence issued in accordance with the provisions of this Act. Licence is granted by the District Magistrate. A non-prohibited bore (NPB) licence is for personal safety; prohibited bore (PB) requires special approval. Possession without licence: imprisonment of 1-3 years and fine for NPB weapons; 3-7 years for PB weapons. The 2019 Amendment reduced the number of firearms per licence from 3 to 2." }]
   },
   {
-      name: "Narcotic Drugs and Psychotropic Substances Act", shortName: "NDPS", year: 1985, category: "Criminal Defense",
-      description: "Law dealing with drugs and their illegal trafficking.",
-      sections: [{ number: "8", title: "Prohibition of operations", content: "No person shall cultivate any coca plant, opium poppy, or cannabis plant; produce, manufacture, possess, sell, purchase, transport, warehouse, use, consume, import, export, or tranship any narcotic drug or psychotropic substance, except for medical or scientific purposes and under licence/permit. Penalties depend on quantity: small quantity  -  up to 1 year imprisonment or fine up to ₹10,000; commercial quantity  -  10-20 years rigorous imprisonment and fine of ₹1-2 lakhs; intermediate quantity  -  up to 10 years and fine up to ₹1 lakh. Repeat offences: 1.5x the punishment, up to death penalty for repeat commercial quantity offenders." }]
+    name: "Narcotic Drugs and Psychotropic Substances Act", shortName: "NDPS", year: 1985, category: "Criminal Defense",
+    description: "Law dealing with drugs and their illegal trafficking.",
+    sections: [{ number: "8", title: "Prohibition of operations", content: "No person shall cultivate any coca plant, opium poppy, or cannabis plant; produce, manufacture, possess, sell, purchase, transport, warehouse, use, consume, import, export, or tranship any narcotic drug or psychotropic substance, except for medical or scientific purposes and under licence/permit. Penalties depend on quantity: small quantity  -  up to 1 year imprisonment or fine up to ₹10,000; commercial quantity  -  10-20 years rigorous imprisonment and fine of ₹1-2 lakhs; intermediate quantity  -  up to 10 years and fine up to ₹1 lakh. Repeat offences: 1.5x the punishment, up to death penalty for repeat commercial quantity offenders." }]
   },
 
   // --- Traffic Law (5) ---
@@ -118,24 +118,24 @@ const acts = [
     ]
   },
   {
-      name: "National Highways Act", shortName: "NHA", year: 1956, category: "Traffic Law",
-      description: "Declaration and maintenance of certain highways as national highways.",
-      sections: [{ number: "3A", title: "Power to acquire land", content: "The Central Government may acquire any land needed for building, maintenance, management, or operation of a national highway by issuing a notification in the Official Gazette. The competent authority shall determine the market value of the land and pay compensation. An amount equal to the market value shall be deposited with the competent authority before taking possession. Any person aggrieved by the award may file objections within 21 days. Appeal lies to the Arbitrator appointed under the Act." }]
+    name: "National Highways Act", shortName: "NHA", year: 1956, category: "Traffic Law",
+    description: "Declaration and maintenance of certain highways as national highways.",
+    sections: [{ number: "3A", title: "Power to acquire land", content: "The Central Government may acquire any land needed for building, maintenance, management, or operation of a national highway by issuing a notification in the Official Gazette. The competent authority shall determine the market value of the land and pay compensation. An amount equal to the market value shall be deposited with the competent authority before taking possession. Any person aggrieved by the award may file objections within 21 days. Appeal lies to the Arbitrator appointed under the Act." }]
   },
   {
-      name: "Central Motor Vehicles Rules", shortName: "CMVR", year: 1989, category: "Traffic Law",
-      description: "Detailed rules for vehicle implementation, safety standards, and emissions.",
-      sections: [{ number: "115", title: "Emission of smoke, etc.", content: "Every motor vehicle shall comply with mass emission standards prescribed by the Central Government (Bharat Stage norms). India currently follows BS-VI emission standards (effective April 2020), which mandate significantly reduced levels of particulate matter, nitrogen oxides, and carbon monoxide. Manufacturers must obtain Type Approval Certificate for each vehicle model. Non-compliant vehicles are subject to fine of ₹10,000 for first offence and may be impounded. Pollution Under Control (PUC) certificate is mandatory for all vehicles." }]
+    name: "Central Motor Vehicles Rules", shortName: "CMVR", year: 1989, category: "Traffic Law",
+    description: "Detailed rules for vehicle implementation, safety standards, and emissions.",
+    sections: [{ number: "115", title: "Emission of smoke, etc.", content: "Every motor vehicle shall comply with mass emission standards prescribed by the Central Government (Bharat Stage norms). India currently follows BS-VI emission standards (effective April 2020), which mandate significantly reduced levels of particulate matter, nitrogen oxides, and carbon monoxide. Manufacturers must obtain Type Approval Certificate for each vehicle model. Non-compliant vehicles are subject to fine of ₹10,000 for first offence and may be impounded. Pollution Under Control (PUC) certificate is mandatory for all vehicles." }]
   },
   {
-      name: "Road Transport Corporations Act", shortName: "RTCA", year: 1950, category: "Traffic Law",
-      description: "Incorporation and management of road transport corporations in states.",
-      sections: [{ number: "18", title: "Duty of Corporation", content: "It shall be the duty of every State Road Transport Corporation to provide or secure or promote the provision of an efficient, adequate, economical, and properly coordinated system of road transport service within the State. The Corporation shall act on business principles and must maintain its fleet in roadworthy condition. The Corporation can operate on inter-state routes with permission. State governments may provide capital grants and loans to the Corporation for expansion." }]
+    name: "Road Transport Corporations Act", shortName: "RTCA", year: 1950, category: "Traffic Law",
+    description: "Incorporation and management of road transport corporations in states.",
+    sections: [{ number: "18", title: "Duty of Corporation", content: "It shall be the duty of every State Road Transport Corporation to provide or secure or promote the provision of an efficient, adequate, economical, and properly coordinated system of road transport service within the State. The Corporation shall act on business principles and must maintain its fleet in roadworthy condition. The Corporation can operate on inter-state routes with permission. State governments may provide capital grants and loans to the Corporation for expansion." }]
   },
   {
-      name: "Carriage by Road Act", shortName: "CRA", year: 2007, category: "Traffic Law",
-      description: "Liability and transit related rules for common carriers.",
-      sections: [{ number: "10", title: "Liability for loss or damage", content: "A common carrier shall be liable for loss of or damage to any goods entrusted to him for carriage, unless he proves that such loss or damage was due to act of God, act of war, order of the Government, or inherent nature of the goods. The liability is limited to the value declared by the consignor, or if no value is declared, such amount as may be prescribed. The consignor must file a claim within 180 days from the date of booking. The carrier must provide a goods receipt for all consignments." }]
+    name: "Carriage by Road Act", shortName: "CRA", year: 2007, category: "Traffic Law",
+    description: "Liability and transit related rules for common carriers.",
+    sections: [{ number: "10", title: "Liability for loss or damage", content: "A common carrier shall be liable for loss of or damage to any goods entrusted to him for carriage, unless he proves that such loss or damage was due to act of God, act of war, order of the Government, or inherent nature of the goods. The liability is limited to the value declared by the consignor, or if no value is declared, such amount as may be prescribed. The consignor must file a claim within 180 days from the date of booking. The carrier must provide a goods receipt for all consignments." }]
   },
 
   // --- Land & Property (4) ---
@@ -159,14 +159,14 @@ const acts = [
     ]
   },
   {
-      name: "Registration Act", shortName: "Registration Act", year: 1908, category: "Land & Property",
-      description: "Law relating to the mandatory registration of certain documents.",
-      sections: [{ number: "17", title: "Compulsory registration", content: "The following documents must be compulsorily registered: (a) instruments of gift of immovable property; (b) non-testamentary instruments which purport to create, declare, assign, or extinguish rights to immovable property of value ₹100 or more (sale deeds, mortgage deeds, lease deeds exceeding 1 year); (c) non-testamentary instruments acknowledging receipt of consideration for such properties. An unregistered document which requires registration is inadmissible as evidence and cannot confer any title. Registration must be done within 4 months of execution at the Sub-Registrar's office." }]
+    name: "Registration Act", shortName: "Registration Act", year: 1908, category: "Land & Property",
+    description: "Law relating to the mandatory registration of certain documents.",
+    sections: [{ number: "17", title: "Compulsory registration", content: "The following documents must be compulsorily registered: (a) instruments of gift of immovable property; (b) non-testamentary instruments which purport to create, declare, assign, or extinguish rights to immovable property of value ₹100 or more (sale deeds, mortgage deeds, lease deeds exceeding 1 year); (c) non-testamentary instruments acknowledging receipt of consideration for such properties. An unregistered document which requires registration is inadmissible as evidence and cannot confer any title. Registration must be done within 4 months of execution at the Sub-Registrar's office." }]
   },
   {
-      name: "Indian Trust Act", shortName: "Trust Act", year: 1882, category: "Land & Property",
-      description: "The law relating to private trusts and trustees.",
-      sections: [{ number: "6", title: "Creation of Trust", content: "A trust is created when the author of the trust indicates with reasonable certainty: (a) intention to create a trust; (b) the purpose of the trust; (c) the beneficiary (who can be any person capable of holding property); and (d) the trust-property. For immovable property, the trust must be declared by a non-testamentary instrument in writing signed by the author or the trustee, and registered. For movable property, ownership must be transferred to the trustee. The trust must be for a lawful purpose." }]
+    name: "Indian Trust Act", shortName: "Trust Act", year: 1882, category: "Land & Property",
+    description: "The law relating to private trusts and trustees.",
+    sections: [{ number: "6", title: "Creation of Trust", content: "A trust is created when the author of the trust indicates with reasonable certainty: (a) intention to create a trust; (b) the purpose of the trust; (c) the beneficiary (who can be any person capable of holding property); and (d) the trust-property. For immovable property, the trust must be declared by a non-testamentary instrument in writing signed by the author or the trustee, and registered. For movable property, ownership must be transferred to the trustee. The trust must be for a lawful purpose." }]
   },
 
   // --- Family Law (5) ---
@@ -184,24 +184,24 @@ const acts = [
     name: "Special Marriage Act", shortName: "SMA", year: 1954, category: "Family Law",
     description: "Provision for a civil form of marriage for all Indian citizens regardless of religion.",
     sections: [
-      { number: "4", title: "Conditions for solemnization", content: "Neither party has a spouse living; minimum age requirements; not within prohibited relationship." },
-      { number: "27", title: "Divorce", content: "Grounds for divorce similar to other personal laws but applies to civil marriages." }
+      { number: "4", title: "Conditions for solemnization", content: "A marriage between any two persons may be solemnized under this Act if at the time of the marriage: (a) neither party has a spouse living; (b) neither party is incapable of giving consent to it due to unsoundness of mind; (c) the male has completed 21 years and the female 18 years; and (d) the parties are not within the degrees of prohibited relationship." },
+      { number: "27", title: "Divorce", content: "A petition for divorce may be presented to the district court by either the husband or the wife on the ground that the respondent has, after the solemnization of the marriage, had voluntary sexual intercourse with any person other than his/her spouse, deserted the petitioner for a continuous period of not less than two years, is undergoing a sentence of imprisonment for seven years or more, treated the petitioner with cruelty, or has been of unsound mind, among other grounds." }
     ]
   },
   {
-      name: "Muslim Personal Law Application Act", shortName: "Shariat Act", year: 1937, category: "Family Law",
-      description: "Mandates the application of Shariat law to Muslims in personal matters.",
-      sections: [{ number: "2", title: "Application of Shariat", content: "In questions regarding marriage (nikah), dissolution of marriage (talaq, khula, mubarat), maintenance (nafaqa), dower (mahr), guardianship, gifts (hiba), trusts (waqf), and inheritance (miraas), the rule of decision in cases where the parties are Muslims shall be the Muslim Personal Law (Shariat). Muslim marriages are contractual in nature (not sacramental). Triple talaq (talaq-e-biddat) was declared unconstitutional by the Supreme Court in Shayara Bano v. Union of India (2017) and criminalized by the Muslim Women Act, 2019." }]
+    name: "Muslim Personal Law Application Act", shortName: "Shariat Act", year: 1937, category: "Family Law",
+    description: "Mandates the application of Shariat law to Muslims in personal matters.",
+    sections: [{ number: "2", title: "Application of Shariat", content: "In questions regarding marriage (nikah), dissolution of marriage (talaq, khula, mubarat), maintenance (nafaqa), dower (mahr), guardianship, gifts (hiba), trusts (waqf), and inheritance (miraas), the rule of decision in cases where the parties are Muslims shall be the Muslim Personal Law (Shariat). Muslim marriages are contractual in nature (not sacramental). Triple talaq (talaq-e-biddat) was declared unconstitutional by the Supreme Court in Shayara Bano v. Union of India (2017) and criminalized by the Muslim Women Act, 2019." }]
   },
   {
-      name: "Guardians and Wards Act", shortName: "GWA", year: 1890, category: "Family Law",
-      description: "Governs the appointment and duties of a minor's guardian.",
-      sections: [{ number: "7", title: "Power of Court to appoint guardian", content: "The court may appoint a guardian of the person or property (or both) of a minor when the court considers it necessary for the welfare of the minor. The court shall consider: (a) the welfare of the minor as the paramount consideration; (b) the personal law of the minor; (c) the character, capacity, and stability of the proposed guardian; (d) the age, sex, and wishes of the minor (if old enough to form an intelligent preference). A minor's own parent is preferred, but the court may appoint any suitable person. The guardian must maintain the minor's property and file accounts." }]
+    name: "Guardians and Wards Act", shortName: "GWA", year: 1890, category: "Family Law",
+    description: "Governs the appointment and duties of a minor's guardian.",
+    sections: [{ number: "7", title: "Power of Court to appoint guardian", content: "The court may appoint a guardian of the person or property (or both) of a minor when the court considers it necessary for the welfare of the minor. The court shall consider: (a) the welfare of the minor as the paramount consideration; (b) the personal law of the minor; (c) the character, capacity, and stability of the proposed guardian; (d) the age, sex, and wishes of the minor (if old enough to form an intelligent preference). A minor's own parent is preferred, but the court may appoint any suitable person. The guardian must maintain the minor's property and file accounts." }]
   },
   {
-      name: "Hindu Adoption and Maintenance Act", shortName: "HAMA", year: 1956, category: "Family Law",
-      description: "Laws for adoption and maintenance obligations within Hindu families.",
-      sections: [{ number: "18", title: "Maintenance of wife", content: "A Hindu wife, whether married before or after the commencement of this Act, shall be entitled to be maintained by her husband during her lifetime. She can live separately and still claim maintenance if the husband: is guilty of desertion, has treated her with cruelty, is suffering from virulent leprosy, has any other wife living, keeps a concubine, has converted, or if there is any other cause justifying separate living. Maintenance includes provision for food, clothing, residence, education, and medical attendance." }]
+    name: "Hindu Adoption and Maintenance Act", shortName: "HAMA", year: 1956, category: "Family Law",
+    description: "Laws for adoption and maintenance obligations within Hindu families.",
+    sections: [{ number: "18", title: "Maintenance of wife", content: "A Hindu wife, whether married before or after the commencement of this Act, shall be entitled to be maintained by her husband during her lifetime. She can live separately and still claim maintenance if the husband: is guilty of desertion, has treated her with cruelty, is suffering from virulent leprosy, has any other wife living, keeps a concubine, has converted, or if there is any other cause justifying separate living. Maintenance includes provision for food, clothing, residence, education, and medical attendance." }]
   },
 
   // --- Employment (4) ---
@@ -218,20 +218,20 @@ const acts = [
     name: "Industrial Disputes Act", shortName: "IDA", year: 1947, category: "Employment",
     description: "Aims to maintain industrial peace and harmony by providing machinery for dispute settlement.",
     sections: [
-      { number: "2(k)", title: "Industrial dispute defined", content: "Difference between employers and workmen connected with employment." },
-      { number: "25F", title: "Condition for retrenchment", content: "One month's notice and compensation must be provided before retrenching a worker." },
-      { number: "33C", title: "Recovery of money due", content: "Workman can apply to the government or a labor court to recover dues from an employer." }
+      { number: "2(k)", title: "Industrial dispute defined", content: "An industrial dispute means any dispute or difference between employers and employers, or between employers and workmen, or between workmen and workmen, which is connected with the employment or non-employment or the terms of employment or with the conditions of labor, of any person." },
+      { number: "25F", title: "Condition for retrenchment", content: "No workman employed in continuous service for not less than one year under an employer shall be retrenched until: (a) the workman has been given one month's notice in writing indicating the reasons for retrenchment and the period of notice has expired, or the workman has been paid in lieu of such notice, wages for the period; and (b) the workman has been paid, at the time of retrenchment, compensation equivalent to 15 days' average pay for every completed year of continuous service." },
+      { number: "33C", title: "Recovery of money due", content: "Where any money is due to a workman from an employer under a settlement or an award, the workman himself or any authorized person may make an application to the appropriate Government for the recovery of the money due to him, and if satisfied, it shall issue a certificate for that amount to the Collector who shall proceed to recover the same." }
     ]
   },
   {
-      name: "Factories Act", shortName: "Factories Act", year: 1948, category: "Employment",
-      description: "Health, safety, and welfare of workers in factories.",
-      sections: [{ number: "11", title: "Cleanliness", content: "Every factory shall be kept clean and free from effluvia arising from any drain, privy, or other nuisance. Effective arrangements shall be made for the disposal of wastes and effluents. The factory must be whitewashed or repainted at prescribed intervals. Floors, walls, and ceilings must be regularly cleaned. This is part of a comprehensive framework covering working hours (max 48/week), overtime (2x wages), women's employment (no night shifts unless permitted), child labour prohibition (under 14), and mandatory provision of canteens, rest rooms, and first-aid facilities." }]
+    name: "Factories Act", shortName: "Factories Act", year: 1948, category: "Employment",
+    description: "Health, safety, and welfare of workers in factories.",
+    sections: [{ number: "11", title: "Cleanliness", content: "Every factory shall be kept clean and free from effluvia arising from any drain, privy, or other nuisance. Effective arrangements shall be made for the disposal of wastes and effluents. The factory must be whitewashed or repainted at prescribed intervals. Floors, walls, and ceilings must be regularly cleaned. This is part of a comprehensive framework covering working hours (max 48/week), overtime (2x wages), women's employment (no night shifts unless permitted), child labour prohibition (under 14), and mandatory provision of canteens, rest rooms, and first-aid facilities." }]
   },
   {
-      name: "Employee's Compensation Act", shortName: "ECA", year: 1923, category: "Employment",
-      description: "Fixed compensation for employees injured in the course of employment.",
-      sections: [{ number: "3", title: "Employer's liability", content: "If personal injury is caused to an employee by accident arising out of and in the course of employment, the employer shall be liable to pay compensation. For death: 50% of monthly wages x relevant factor (based on age), minimum ₹1,20,000. For permanent total disablement: 60% of monthly wages x relevant factor, minimum ₹1,40,000. For permanent partial disablement: percentage of total disablement compensation. For temporary disablement: half-monthly payment equal to 25% of monthly wages. Employer's liability is absolute  -  no proof of negligence needed." }]
+    name: "Employee's Compensation Act", shortName: "ECA", year: 1923, category: "Employment",
+    description: "Fixed compensation for employees injured in the course of employment.",
+    sections: [{ number: "3", title: "Employer's liability", content: "If personal injury is caused to an employee by accident arising out of and in the course of employment, the employer shall be liable to pay compensation. For death: 50% of monthly wages x relevant factor (based on age), minimum ₹1,20,000. For permanent total disablement: 60% of monthly wages x relevant factor, minimum ₹1,40,000. For permanent partial disablement: percentage of total disablement compensation. For temporary disablement: half-monthly payment equal to 25% of monthly wages. Employer's liability is absolute  -  no proof of negligence needed." }]
   },
 
   // --- Consumer Rights (4) ---
@@ -246,19 +246,19 @@ const acts = [
     ]
   },
   {
-      name: "Legal Metrology Act", shortName: "LMA", year: 2009, category: "Consumer Rights",
-      description: "Standards of weights and measures; packaging rules.",
-      sections: [{ number: "11", title: "Prohibition of non-standard units", content: "No person shall quote or issue any price list, invoice, or commercial document in relation to any goods, class of goods, or service in any unit of weight, measure, or numeration other than the standard unit. All prepackaged commodities must declare: name, address, quantity/weight, month and year of manufacture, expiry date, MRP, and consumer complaints address. Sale above MRP is punishable. First offence: fine up to ₹25,000; second offence: fine up to ₹50,000; third offence: fine up to ₹1 lakh and imprisonment up to 1 year." }]
+    name: "Legal Metrology Act", shortName: "LMA", year: 2009, category: "Consumer Rights",
+    description: "Standards of weights and measures; packaging rules.",
+    sections: [{ number: "11", title: "Prohibition of non-standard units", content: "No person shall quote or issue any price list, invoice, or commercial document in relation to any goods, class of goods, or service in any unit of weight, measure, or numeration other than the standard unit. All prepackaged commodities must declare: name, address, quantity/weight, month and year of manufacture, expiry date, MRP, and consumer complaints address. Sale above MRP is punishable. First offence: fine up to ₹25,000; second offence: fine up to ₹50,000; third offence: fine up to ₹1 lakh and imprisonment up to 1 year." }]
   },
   {
-      name: "Bureau of Indian Standards Act", shortName: "BIS Act", year: 2016, category: "Consumer Rights",
-      description: "Product quality certification and standard setting.",
-      sections: [{ number: "13", title: "Indian Standards", content: "The Bureau of Indian Standards (BIS) has authority to establish, publish, and promote Indian Standards for goods, services, and processes. BIS grants licences to use the Standard Mark (ISI mark) on products that conform to Indian Standards. Certain products require mandatory BIS certification (helmets, cement, LPG cylinders, packaged drinking water, electrical appliances, etc.). Using ISI mark without licence is punishable with imprisonment up to 2 years and fine up to ₹5 lakhs. BIS also handles Hallmarking of gold jewellery (mandatory since 2021)." }]
+    name: "Bureau of Indian Standards Act", shortName: "BIS Act", year: 2016, category: "Consumer Rights",
+    description: "Product quality certification and standard setting.",
+    sections: [{ number: "13", title: "Indian Standards", content: "The Bureau of Indian Standards (BIS) has authority to establish, publish, and promote Indian Standards for goods, services, and processes. BIS grants licences to use the Standard Mark (ISI mark) on products that conform to Indian Standards. Certain products require mandatory BIS certification (helmets, cement, LPG cylinders, packaged drinking water, electrical appliances, etc.). Using ISI mark without licence is punishable with imprisonment up to 2 years and fine up to ₹5 lakhs. BIS also handles Hallmarking of gold jewellery (mandatory since 2021)." }]
   },
   {
-      name: "Competition Act", shortName: "Competition Act", year: 2002, category: "Consumer Rights",
-      description: "Prevention of practices having an adverse effect on market competition.",
-      sections: [{ number: "3", title: "Anti-competitive agreements", content: "Any agreement in respect of production, supply, distribution, storage, acquisition, or control of goods/services which causes or is likely to cause an appreciable adverse effect on competition (AAEC) within India is void. Horizontal agreements (between competitors) including price-fixing, market sharing, bid-rigging, and output limitation are presumed to have AAEC. Vertical agreements (e.g., tie-in, exclusive supply/distribution, refusal to deal, resale price maintenance) are assessed on rule of reason. Penalty: up to 10% of average turnover for preceding 3 years; for cartels: up to 3x the profit or 10% of turnover." }]
+    name: "Competition Act", shortName: "Competition Act", year: 2002, category: "Consumer Rights",
+    description: "Prevention of practices having an adverse effect on market competition.",
+    sections: [{ number: "3", title: "Anti-competitive agreements", content: "Any agreement in respect of production, supply, distribution, storage, acquisition, or control of goods/services which causes or is likely to cause an appreciable adverse effect on competition (AAEC) within India is void. Horizontal agreements (between competitors) including price-fixing, market sharing, bid-rigging, and output limitation are presumed to have AAEC. Vertical agreements (e.g., tie-in, exclusive supply/distribution, refusal to deal, resale price maintenance) are assessed on rule of reason. Penalty: up to 10% of average turnover for preceding 3 years; for cartels: up to 3x the profit or 10% of turnover." }]
   },
 
   // --- Business Law (5) ---
@@ -275,25 +275,25 @@ const acts = [
     name: "Companies Act", shortName: "Companies Act", year: 2013, category: "Business Law",
     description: "Consolidated law for the formation and regulation of companies in India.",
     sections: [
-      { number: "2(20)", title: "Company defined", content: "A company incorporated under this Act or under any previous company law." },
-      { number: "135", title: "Corporate Social Responsibility", content: "Mandatory requirement for certain companies to spend 2% of average net profits on CSR." },
-      { number: "403", title: "Fee for filing", content: "Documents must be filed within the prescribed time with specified fees." }
+      { number: "2(20)", title: "Company defined", content: "A company means a company incorporated under this Act or under any previous company law. This imparts a distinct legal entity to the organization separate from its members, allowing it to own property, incur debts, and sue or be sued in its own name." },
+      { number: "135", title: "Corporate Social Responsibility", content: "Every company having net worth of ₹500 crore or more, turnover of ₹1,000 crore or more, or net profit of ₹5 crore or more during the immediately preceding financial year shall constitute a Corporate Social Responsibility Committee. The Board shall ensure that the company spends, in every financial year, at least 2% of the average net profits made during the three immediately preceding financial years towards CSR." },
+      { number: "403", title: "Fee for filing", content: "Any document, required to be submitted, filed, registered or recorded under this Act, shall be submitted within the time specified on payment of such fee as may be prescribed. Any non-compliance might lead to additional fees or penalties, and directors may be held liable." }
     ]
   },
   {
-      name: "Partnership Act", shortName: "Partnership Act", year: 1932, category: "Business Law",
-      description: "Relation between persons who have agreed to share profits of a business.",
-      sections: [{ number: "4", title: "Partnership defined", content: "Partnership is the relation between persons who have agreed to share the profits of a business carried on by all or any of them acting for all. The business must be carried on by all or any of the partners acting for all (mutual agency). Maximum partners: 50 (no upper limit for banking/professional firms). A partnership firm can hold property, sue and be sued in its firm name if registered. Registration is not mandatory but an unregistered firm cannot enforce any right arising from contract in any court. Partners have unlimited liability for the debts of the firm." }]
+    name: "Partnership Act", shortName: "Partnership Act", year: 1932, category: "Business Law",
+    description: "Relation between persons who have agreed to share profits of a business.",
+    sections: [{ number: "4", title: "Partnership defined", content: "Partnership is the relation between persons who have agreed to share the profits of a business carried on by all or any of them acting for all. The business must be carried on by all or any of the partners acting for all (mutual agency). Maximum partners: 50 (no upper limit for banking/professional firms). A partnership firm can hold property, sue and be sued in its firm name if registered. Registration is not mandatory but an unregistered firm cannot enforce any right arising from contract in any court. Partners have unlimited liability for the debts of the firm." }]
   },
   {
-      name: "Negotiable Instruments Act", shortName: "NI Act", year: 1881, category: "Business Law",
-      description: "Promissory notes, bills of exchange, and cheques.",
-      sections: [{ number: "138", title: "Cheque bounce", content: "Where a cheque drawn for the discharge of any liability is returned unpaid due to insufficiency of funds, the drawer shall be punished with imprisonment up to 2 years, or fine up to twice the cheque amount, or both. Conditions: (a) cheque must be presented within 6 months or validity period; (b) payee must give written notice demanding payment within 30 days of dishonour; (c) drawer must fail to pay within 15 days of receipt of notice. Complaint must be filed within 1 month of expiry of the 15-day period. The Supreme Court in Dayawati v. Yogesh Kumar held this is a strict liability offence." }]
+    name: "Negotiable Instruments Act", shortName: "NI Act", year: 1881, category: "Business Law",
+    description: "Promissory notes, bills of exchange, and cheques.",
+    sections: [{ number: "138", title: "Cheque bounce", content: "Where a cheque drawn for the discharge of any liability is returned unpaid due to insufficiency of funds, the drawer shall be punished with imprisonment up to 2 years, or fine up to twice the cheque amount, or both. Conditions: (a) cheque must be presented within 6 months or validity period; (b) payee must give written notice demanding payment within 30 days of dishonour; (c) drawer must fail to pay within 15 days of receipt of notice. Complaint must be filed within 1 month of expiry of the 15-day period. The Supreme Court in Dayawati v. Yogesh Kumar held this is a strict liability offence." }]
   },
   {
-      name: "Insolvency and Bankruptcy Code", shortName: "IBC", year: 2016, category: "Business Law",
-      description: "Time-bound process for resolving insolvency in companies and individuals.",
-      sections: [{ number: "7", title: "Initiation by financial creditor", content: "A financial creditor (either by itself or jointly with other financial creditors) may file an application before NCLT for initiating Corporate Insolvency Resolution Process (CIRP) against a corporate debtor when a default of ₹1 crore or more has occurred. The NCLT must admit or reject the application within 14 days. Upon admission, a moratorium is declared (no suits, no recovery, no transfer of assets), and an Interim Resolution Professional is appointed. The entire CIRP must be completed within 330 days (including litigation time). If no resolution plan is approved, the company goes into liquidation." }]
+    name: "Insolvency and Bankruptcy Code", shortName: "IBC", year: 2016, category: "Business Law",
+    description: "Time-bound process for resolving insolvency in companies and individuals.",
+    sections: [{ number: "7", title: "Initiation by financial creditor", content: "A financial creditor (either by itself or jointly with other financial creditors) may file an application before NCLT for initiating Corporate Insolvency Resolution Process (CIRP) against a corporate debtor when a default of ₹1 crore or more has occurred. The NCLT must admit or reject the application within 14 days. Upon admission, a moratorium is declared (no suits, no recovery, no transfer of assets), and an Interim Resolution Professional is appointed. The entire CIRP must be completed within 330 days (including litigation time). If no resolution plan is approved, the company goes into liquidation." }]
   },
 
   // --- Cyber Law (4) ---
@@ -311,20 +311,20 @@ const acts = [
     name: "Digital Personal Data Protection Act", shortName: "DPDP", year: 2023, category: "Cyber Law",
     description: "Regulates the processing of digital personal data while respecting individuals' privacy.",
     sections: [
-      { number: "4", title: "Processing grounds", content: "Personal data may be processed only for a lawful purpose with consent or for certain legitimate uses." },
-      { number: "8", title: "Data Fiduciary obligations", content: "Obligation to maintain accuracy and ensure safety of personal data." },
-      { number: "15", title: "Right to grievance redressal", content: "Data Principal has the right to readily available means of grievance redressal." }
+      { number: "4", title: "Processing grounds", content: "A person may process the personal data of a Data Principal only in accordance with the provisions of this Act and for a lawful purpose, (a) for which the Data Principal has given her consent; or (b) for certain legitimate uses. Legitimate uses include situations where the Data Principal has voluntarily provided her personal data to the Data Fiduciary." },
+      { number: "8", title: "Data Fiduciary obligations", content: "A Data Fiduciary shall be responsible for complying with the provisions of this Act. It includes ensuring completeness, accuracy, and consistency of personal data, implementing appropriate technical and organizational measures for security, and protecting personal data by taking reasonable security safeguards to prevent personal data breach." },
+      { number: "15", title: "Right to grievance redressal", content: "A Data Principal shall have the right to have readily available means of grievance redressal provided by a Data Fiduciary or Consent Manager in respect of any act or omission regarding the performance of its obligations in relation to the personal data of such Data Principal." }
     ]
   },
   {
-      name: "Aadhaar Act", shortName: "Aadhaar Act", year: 2016, category: "Cyber Law",
-      description: "Targeted delivery of subsidies and benefits using biometric identification.",
-      sections: [{ number: "29", title: "Restriction on sharing information", content: "Core biometric information (fingerprint, iris scan) collected under this Act shall not be shared with anyone for any reason whatsoever, nor shall it be used for any purpose other than generation of Aadhaar numbers and authentication. Identity information, other than core biometric, may be shared only with the consent of the Aadhaar number holder or pursuant to a court order. The Supreme Court in K.S. Puttaswamy v. Union of India upheld Aadhaar's validity but struck down Section 57 (use by private entities), mandatory linking with bank accounts and mobile numbers, and made authentication voluntary for most services." }]
+    name: "Aadhaar Act", shortName: "Aadhaar Act", year: 2016, category: "Cyber Law",
+    description: "Targeted delivery of subsidies and benefits using biometric identification.",
+    sections: [{ number: "29", title: "Restriction on sharing information", content: "Core biometric information (fingerprint, iris scan) collected under this Act shall not be shared with anyone for any reason whatsoever, nor shall it be used for any purpose other than generation of Aadhaar numbers and authentication. Identity information, other than core biometric, may be shared only with the consent of the Aadhaar number holder or pursuant to a court order. The Supreme Court in K.S. Puttaswamy v. Union of India upheld Aadhaar's validity but struck down Section 57 (use by private entities), mandatory linking with bank accounts and mobile numbers, and made authentication voluntary for most services." }]
   },
   {
-      name: "Computer Emergency Response Team Rules", shortName: "CERT Rules", year: 2013, category: "Cyber Law",
-      description: "Incident reporting and coordination for cyber security.",
-      sections: [{ number: "12", title: "Mandatory reporting", content: "All service providers, intermediaries, data centres, and body corporates must mandatorily report specified cyber security incidents to CERT-In within 6 hours of noticing or being brought to notice. Reportable incidents include: targeted scanning/probing, compromise of critical systems, unauthorized access, website defacement, malware attacks, data breaches, DDoS attacks, attacks on IoT devices, and fake mobile apps. CERT-In may also issue directions for blocking websites or content in the interest of cyber security. Non-compliance may result in imprisonment up to 1 year or fine up to ₹1 lakh." }]
+    name: "Computer Emergency Response Team Rules", shortName: "CERT Rules", year: 2013, category: "Cyber Law",
+    description: "Incident reporting and coordination for cyber security.",
+    sections: [{ number: "12", title: "Mandatory reporting", content: "All service providers, intermediaries, data centres, and body corporates must mandatorily report specified cyber security incidents to CERT-In within 6 hours of noticing or being brought to notice. Reportable incidents include: targeted scanning/probing, compromise of critical systems, unauthorized access, website defacement, malware attacks, data breaches, DDoS attacks, attacks on IoT devices, and fake mobile apps. CERT-In may also issue directions for blocking websites or content in the interest of cyber security. Non-compliance may result in imprisonment up to 1 year or fine up to ₹1 lakh." }]
   },
 
   // --- Health & Medical (5) ---
@@ -332,32 +332,32 @@ const acts = [
     name: "Medical Termination of Pregnancy Act", shortName: "MTP Act", year: 1971, category: "Health & Medical",
     description: "Specific conditions under which pregnancies can be legally terminated in India.",
     sections: [
-      { number: "3", title: "When termination is legal", content: "Termination allowed up to 20/24 weeks depending on medical opinion and health risks." },
-      { number: "5", title: "Emergency termination", content: "Abortion allowed at any stage if it is immediately necessary to save the pregnant woman's life." }
+      { number: "3", title: "When termination is legal", content: "A pregnancy may be terminated by a registered medical practitioner if the length of the pregnancy doesn't exceed 20 weeks, or by two practitioners if it exceeds 20 weeks but doesn't exceed 24 weeks for certain categories. They must opine in good faith that the continuance of the pregnancy would involve a risk to the life of the pregnant woman or of grave injury to her physical or mental health, or a substantial risk of physical/mental abnormality for the child." },
+      { number: "5", title: "Emergency termination", content: "The provisions relating to the length of the pregnancy and the opinion of not less than two registered medical practitioners shall not apply to the termination of a pregnancy by a registered medical practitioner in a case where he is of opinion, formed in good faith, that the termination of such pregnancy is immediately necessary to save the life of the pregnant woman." }
     ]
   },
   {
     name: "Mental Healthcare Act", shortName: "MHCA", year: 2017, category: "Health & Medical",
     description: "Rights based law to provide mental healthcare and ensure dignity for persons with mental illness.",
     sections: [
-      { number: "18", title: "Right to access healthcare", content: "Every person shall have a right to access mental healthcare and services run by the government." },
-      { number: "115", title: "Decriminalization of suicide", content: "Presumption of severe stress for any person who attempts suicide; they shall not be punished under IPC." }
+      { number: "18", title: "Right to access healthcare", content: "Every person shall have a right to access mental healthcare and treatment from mental health establishments run or funded by the appropriate Government. This right includes provision of acute mental healthcare services, half-way homes, sheltered accommodation, and supported accommodation to ensure that no person is discriminated against on the basis of mental illness." },
+      { number: "115", title: "Decriminalization of suicide", content: "Notwithstanding anything contained in section 309 of the Indian Penal Code, any person who attempts to commit suicide shall be presumed, unless proved otherwise, to have severe stress and shall not be tried and punished. The appropriate Government shall have a duty to provide care, treatment and rehabilitation to a person to reduce the risk of recurrence." }
     ]
   },
   {
-      name: "Drugs and Cosmetics Act", shortName: "D&C Act", year: 1940, category: "Health & Medical",
-      description: "Standards for import, manufacture, and sale of drugs and cosmetics.",
-      sections: [{ number: "18", title: "Prohibition of manufacture", content: "No person shall manufacture for sale, sell, stock, exhibit, or distribute any drug which is misbranded (misleading label), adulterated (substandard ingredients), or spurious (imitation/counterfeit). Manufacture requires a licence from the State Drug Controller. Import requires approval from the Central Drugs Standard Control Organisation (CDSCO). Sale of misbranded drugs: imprisonment up to 1 year and fine up to ₹20,000. Sale of adulterated drugs: up to 3 years and ₹50,000 fine. Sale of spurious drugs: up to life imprisonment and fine up to ₹10 lakhs or 3x the value of confiscated drugs." }]
+    name: "Drugs and Cosmetics Act", shortName: "D&C Act", year: 1940, category: "Health & Medical",
+    description: "Standards for import, manufacture, and sale of drugs and cosmetics.",
+    sections: [{ number: "18", title: "Prohibition of manufacture", content: "No person shall manufacture for sale, sell, stock, exhibit, or distribute any drug which is misbranded (misleading label), adulterated (substandard ingredients), or spurious (imitation/counterfeit). Manufacture requires a licence from the State Drug Controller. Import requires approval from the Central Drugs Standard Control Organisation (CDSCO). Sale of misbranded drugs: imprisonment up to 1 year and fine up to ₹20,000. Sale of adulterated drugs: up to 3 years and ₹50,000 fine. Sale of spurious drugs: up to life imprisonment and fine up to ₹10 lakhs or 3x the value of confiscated drugs." }]
   },
   {
-      name: "Transplantation of Human Organs Act", shortName: "THOA", year: 1994, category: "Health & Medical",
-      description: "Regulation of removal, storage, and transplantation of human organs and tissues.",
-      sections: [{ number: "18", title: "Illegal organ removal", content: "Any person who renders services for or abets the removal of any human organ without authority is punishable with imprisonment of 5-10 years and fine of ₹20 lakhs to ₹1 crore. Organ donation from living donors is permitted only to near relatives (spouse, parents, siblings, children). Non-related donors require approval from the Authorization Committee constituted by the appropriate government. Commercial dealing in human organs is strictly prohibited. Any intermediary (tout/agent) facilitating illegal organ trade faces the same punishment. Brain death was legally recognized as death for the purposes of organ transplantation." }]
+    name: "Transplantation of Human Organs Act", shortName: "THOA", year: 1994, category: "Health & Medical",
+    description: "Regulation of removal, storage, and transplantation of human organs and tissues.",
+    sections: [{ number: "18", title: "Illegal organ removal", content: "Any person who renders services for or abets the removal of any human organ without authority is punishable with imprisonment of 5-10 years and fine of ₹20 lakhs to ₹1 crore. Organ donation from living donors is permitted only to near relatives (spouse, parents, siblings, children). Non-related donors require approval from the Authorization Committee constituted by the appropriate government. Commercial dealing in human organs is strictly prohibited. Any intermediary (tout/agent) facilitating illegal organ trade faces the same punishment. Brain death was legally recognized as death for the purposes of organ transplantation." }]
   },
   {
-      name: "Pre-Conception and Pre-Natal Diagnostic Techniques Act", shortName: "PCPNDT", year: 1994, category: "Health & Medical",
-      description: "Prohibits sex selection before or after conception; prevents female feticide.",
-      sections: [{ number: "3A", title: "Prohibition of sex selection", content: "No person, including a specialist or team of specialists, shall conduct or cause to be conducted or aid in any pre-conception or pre-natal sex determination technique on any woman for the purpose of detecting the sex of a foetus. All genetic counselling centres, laboratories, and clinics must be registered. Advertising sex determination is prohibited. Penalty for contravention: first offence  -  imprisonment up to 3 years and fine up to ₹10,000; subsequent offence  -  imprisonment of 3-5 years and fine of ₹50,000 to ₹1,00,000. Medical practitioners face suspension/cancellation of registration alongside criminal penalties." }]
+    name: "Pre-Conception and Pre-Natal Diagnostic Techniques Act", shortName: "PCPNDT", year: 1994, category: "Health & Medical",
+    description: "Prohibits sex selection before or after conception; prevents female feticide.",
+    sections: [{ number: "3A", title: "Prohibition of sex selection", content: "No person, including a specialist or team of specialists, shall conduct or cause to be conducted or aid in any pre-conception or pre-natal sex determination technique on any woman for the purpose of detecting the sex of a foetus. All genetic counselling centres, laboratories, and clinics must be registered. Advertising sex determination is prohibited. Penalty for contravention: first offence  -  imprisonment up to 3 years and fine up to ₹10,000; subsequent offence  -  imprisonment of 3-5 years and fine of ₹50,000 to ₹1,00,000. Medical practitioners face suspension/cancellation of registration alongside criminal penalties." }]
   },
 
   // --- Education Law (3) ---
@@ -371,14 +371,14 @@ const acts = [
     ]
   },
   {
-      name: "University Grants Commission Act", shortName: "UGC Act", year: 1956, category: "Education Law",
-      description: "Coordination and determination of standards in Universities.",
-      sections: [{ number: "22", title: "Right to confer degrees", content: "Only a university established by law or an institution deemed to be a university or an institution specially empowered by an Act of Parliament shall have the right to confer or grant degrees. Any person who issues, grants, or awards a degree without authorization shall be punishable with imprisonment up to 3 years or fine up to ₹1,000 or both. The UGC maintains a list of recognized universities and has power to de-recognize institutions not meeting prescribed standards. Deemed university status can be granted by the Central Government on UGC recommendation." }]
+    name: "University Grants Commission Act", shortName: "UGC Act", year: 1956, category: "Education Law",
+    description: "Coordination and determination of standards in Universities.",
+    sections: [{ number: "22", title: "Right to confer degrees", content: "Only a university established by law or an institution deemed to be a university or an institution specially empowered by an Act of Parliament shall have the right to confer or grant degrees. Any person who issues, grants, or awards a degree without authorization shall be punishable with imprisonment up to 3 years or fine up to ₹1,000 or both. The UGC maintains a list of recognized universities and has power to de-recognize institutions not meeting prescribed standards. Deemed university status can be granted by the Central Government on UGC recommendation." }]
   },
   {
-      name: "AICTE Act", shortName: "AICTE Act", year: 1987, category: "Education Law",
-      description: "Planning and development of technical education system in India.",
-      sections: [{ number: "10", title: "Functional mandate", content: "AICTE is mandated to: (a) grant approval for establishing new technical institutions and introduce new courses/programmes in all disciplines of engineering, technology, management, architecture, pharmacy, applied arts, and hotel management; (b) fix norms for intake capacity, fees, faculty qualifications, and infrastructure; (c) promote quality and innovation in technical education; (d) conduct inspection and ensure compliance. Institutions operating without AICTE approval are illegal and degrees granted by them are invalid. AICTE can impose penalties including withdrawal of approval and debarring admissions." }]
+    name: "AICTE Act", shortName: "AICTE Act", year: 1987, category: "Education Law",
+    description: "Planning and development of technical education system in India.",
+    sections: [{ number: "10", title: "Functional mandate", content: "AICTE is mandated to: (a) grant approval for establishing new technical institutions and introduce new courses/programmes in all disciplines of engineering, technology, management, architecture, pharmacy, applied arts, and hotel management; (b) fix norms for intake capacity, fees, faculty qualifications, and infrastructure; (c) promote quality and innovation in technical education; (d) conduct inspection and ensure compliance. Institutions operating without AICTE approval are illegal and degrees granted by them are invalid. AICTE can impose penalties including withdrawal of approval and debarring admissions." }]
   },
 
   // --- Human Rights (3) ---
@@ -386,8 +386,8 @@ const acts = [
     name: "Protection of Human Rights Act", shortName: "PHRA", year: 1993, category: "Human Rights",
     description: "Establishes the National and State Human Rights Commissions to protect citizens' liberties.",
     sections: [
-      { number: "12", title: "Functions of NHRC", content: "Inquire into human rights violations and negligence by public servants." },
-      { number: "18", title: "Steps during inquiry", content: "Commission may recommend payment of compensation or damages to the victim." }
+      { number: "12", title: "Functions of NHRC", content: "The Commission shall inquire, suo motu or on a petition presented to it by a victim or any person on his behalf, into complaint of (i) violation of human rights or abetment thereof; or (ii) negligence in the prevention of such violation, by a public servant; intervene in any proceeding involving allegation of human rights violation; and visit any jail or other institution to study the living conditions." },
+      { number: "18", title: "Steps during inquiry", content: "Upon the completion of an inquiry held under this Act, where the inquiry discloses the commission of violation of human rights or negligence in the prevention of violation of human rights by a public servant, the Commission may recommend to the concerned Government or authority to make payment of compensation or damages to the complainant or to the victim or the members of his family." }
     ]
   },
   {
@@ -399,9 +399,9 @@ const acts = [
     ]
   },
   {
-      name: "Juvenile Justice Act", shortName: "JJ Act", year: 2015, category: "Human Rights",
-      description: "Law for children in conflict with law and children in need of care and protection.",
-      sections: [{ number: "15", title: "Heinous offences by juveniles aged 16-18", content: "In case of a heinous offence (minimum punishment of 7 years or more) alleged to have been committed by a child aged 16-18, the Juvenile Justice Board shall conduct a preliminary assessment regarding mental and physical capacity, ability to understand consequences, and circumstances of the offence. If the Board is satisfied, the case may be transferred to the Children's Court which may try the child as an adult. However, the maximum sentence for a juvenile is 3 years in a Special Home, with provision for periodic review. This amendment was introduced after the 2012 Delhi gang rape case where one accused was a juvenile." }]
+    name: "Juvenile Justice Act", shortName: "JJ Act", year: 2015, category: "Human Rights",
+    description: "Law for children in conflict with law and children in need of care and protection.",
+    sections: [{ number: "15", title: "Heinous offences by juveniles aged 16-18", content: "In case of a heinous offence (minimum punishment of 7 years or more) alleged to have been committed by a child aged 16-18, the Juvenile Justice Board shall conduct a preliminary assessment regarding mental and physical capacity, ability to understand consequences, and circumstances of the offence. If the Board is satisfied, the case may be transferred to the Children's Court which may try the child as an adult. However, the maximum sentence for a juvenile is 3 years in a Special Home, with provision for periodic review. This amendment was introduced after the 2012 Delhi gang rape case where one accused was a juvenile." }]
   }
 ];
 

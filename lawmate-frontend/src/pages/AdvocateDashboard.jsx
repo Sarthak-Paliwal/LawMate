@@ -72,7 +72,7 @@ export default function AdvocateDashboard() {
         <div>
           <div className="flex items-center gap-3">
             <h1 className="text-3xl font-bold text-default">{t('advocateDashboard')}</h1>
-            {user?.isVerified && (
+            {user?.isAdvocateVerified && (
               <span className="flex items-center gap-1.5 px-2.5 py-1 bg-green-50 dark:bg-green-900/30 text-green-600 dark:text-green-400 text-xs font-bold uppercase tracking-wider rounded-lg border border-green-200 dark:border-green-800/50">
                 <svg className="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20"><path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clipRule="evenodd"></path></svg>
                 Verified
@@ -104,7 +104,7 @@ export default function AdvocateDashboard() {
       </div>
 
       {/* Advocate Verification Banner */}
-      {!user?.isVerified && (
+      {!user?.isAdvocateVerified && (
         <div className="bg-white dark:bg-slate-800 p-6 rounded-xl border border-slate-200 dark:border-slate-700 shadow-sm relative overflow-hidden">
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 relative z-10">
             <div className="flex-1 space-y-2">

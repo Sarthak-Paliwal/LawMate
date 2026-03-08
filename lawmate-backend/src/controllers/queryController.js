@@ -34,6 +34,7 @@ exports.analyzeQuery = async (req, res, next) => {
         relevantActs: aiResponse.relevantActs?.length > 0 ? aiResponse.relevantActs : ruleDecision.relevantActs,
         estimatedTime: ruleDecision.estimatedTime,
         estimatedCost: ruleDecision.estimatedCost,
+        worthItAnalysis: ruleDecision.worthItAnalysis,
         nextSteps: ruleDecision.nextSteps
     };
 

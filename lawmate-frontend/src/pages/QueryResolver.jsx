@@ -139,6 +139,7 @@ export default function QueryResolver() {
   };
 
   const progress = Math.min((step / TOTAL_STEPS) * 100, 100);
+  const displayStep = Math.min(step, TOTAL_STEPS);
 
   return (
     <div className="max-w-3xl mx-auto px-4 py-8">
@@ -152,7 +153,7 @@ export default function QueryResolver() {
       {/* Progress Bar */}
       <div className="mb-8">
         <div className="flex justify-between text-xs font-medium text-muted uppercase tracking-wider mb-2">
-          <span>Step {step} of {TOTAL_STEPS}</span>
+          <span>Step {displayStep} of {TOTAL_STEPS}</span>
           <span>{Math.round(progress)}% Completed</span>
         </div>
         <div className="w-full h-2 bg-slate-200 dark:bg-slate-700 rounded-full overflow-hidden">
