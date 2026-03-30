@@ -45,6 +45,12 @@ const ensureTestAccount = async () => {
  * @param {string} otp - 6 digit string
  */
 exports.sendVerificationOTP = async (email, otp) => {
+  // Render Free Tier blocks all outgoing SMTP ports (465, 587) unless a credit card is on file.
+  // We log the OTP here so testing the frontend can continue smoothly!
+  console.log(`\n================================`);
+  console.log(`🔐 OTP CODE FOR ${email}: ${otp}`);
+  console.log(`================================\n`);
+  
   try {
     await ensureTestAccount();
     const transporter = getTransport();
