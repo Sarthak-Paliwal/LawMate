@@ -11,4 +11,6 @@ router.get('/profile', protect, role('advocate'), advocateController.getMyProfil
 router.put('/profile', protect, role('advocate'), advocateController.updateProfile);
 router.put('/profile/picture', protect, role('advocate'), upload.single('profilePicture'), advocateController.uploadProfilePicture);
 
+router.post('/compare', protect, role('user'), advocateController.compareAdvocates);
+
 module.exports = router;

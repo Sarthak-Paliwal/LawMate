@@ -7,6 +7,7 @@ const legalQuerySchema = new mongoose.Schema({
   category: { type: String },
   subCategory: { type: String },
   description: { type: String },
+  queryType: { type: String, enum: ['chatbot', 'resolver'], default: 'chatbot' },
 
   status: { type: String, enum: ['open', 'closed'], default: 'open' },
 

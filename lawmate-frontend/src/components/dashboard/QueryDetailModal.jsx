@@ -1,6 +1,7 @@
 import React from 'react';
 import Card from '../common/Card';
 import Button from '../common/Button';
+import FormattedAIResponse from '../common/FormattedAIResponse';
 
 export default function QueryDetailModal({ isOpen, onClose, query }) {
   if (!isOpen || !query) return null;
@@ -85,8 +86,8 @@ export default function QueryDetailModal({ isOpen, onClose, query }) {
           ) : (
              <section className="space-y-3">
                 <h4 className="text-sm font-bold text-default">AI Response</h4>
-                <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl text-sm leading-relaxed">
-                  {query.response || aiAnalysis.legalInsight}
+                <div className="p-4 bg-slate-50 dark:bg-slate-800 rounded-xl leading-relaxed">
+                  <FormattedAIResponse text={query.response || aiAnalysis.legalInsight} />
                 </div>
              </section>
           )}

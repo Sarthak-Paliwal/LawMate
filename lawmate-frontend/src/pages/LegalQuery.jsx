@@ -3,98 +3,16 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 import api from '../api/axios';
 import { useLanguage } from '../i18n/LanguageContext';
 import { MdDelete, MdCheckCircle, MdRadioButtonUnchecked, MdBookmarkAdd } from 'react-icons/md';
+import FormattedAIResponse from '../components/common/FormattedAIResponse';
+import { validateChatQuery } from '../utils/validateQuery';
 
-/**
- * Parses a raw AI response string and returns well-formatted JSX.
- * Handles: **bold**, ## headings, numbered lists, bullet points, and cleans stray symbols.
- */
-function FormattedResponse({ text }) {
-  if (!text) return null;
-
-  const lines = text.split('\n');
-  const elements = [];
-
-  lines.forEach((line, i) => {
-    const trimmed = line.trim();
-    if (!trimmed) {
-      // blank line → small spacer
-      elements.push(<div key={i} className="h-2" />);
-      return;
-    }
-
-    // --- Heading lines: ### or ## or # ---
-    const headingMatch = trimmed.match(/^(#{1,3})\s+(.*)/);
-    if (headingMatch) {
-      const content = cleanInline(headingMatch[2]);
-      elements.push(
-        <div key={i} className="font-semibold text-[14px] mt-2.5 mb-1 text-slate-900 dark:text-white">
-          {content}
-        </div>
-      );
-      return;
-    }
-
-    // --- Numbered list: 1. or 1) ---
-    const numberedMatch = trimmed.match(/^(\d+)[.)]\s+(.*)/);
-    if (numberedMatch) {
-      const content = cleanInline(numberedMatch[2]);
-      elements.push(
-        <div key={i} className="flex gap-2 mt-1">
-          <span className="font-semibold text-indigo-600 dark:text-indigo-400 min-w-[1.2em] text-right">{numberedMatch[1]}.</span>
-          <span>{content}</span>
-        </div>
-      );
-      return;
-    }
-
-    // --- Bullet list: - or * at start ---
-    const bulletMatch = trimmed.match(/^[-*•]\s+(.*)/);
-    if (bulletMatch) {
-      const content = cleanInline(bulletMatch[1]);
-      elements.push(
-        <div key={i} className="flex gap-2 mt-1 pl-1">
-          <span className="text-indigo-500 dark:text-indigo-400">•</span>
-          <span>{content}</span>
-        </div>
-      );
-      return;
-    }
-
-    // --- Normal paragraph line ---
-    elements.push(
-      <p key={i} className="mt-1 leading-relaxed">
-        {cleanInline(trimmed)}
-      </p>
-    );
-  });
-
-  return <div className="text-[13.5px] space-y-0.5 text-slate-700 dark:text-slate-300">{elements}</div>;
-}
-
-/**
- * Converts inline markdown (**bold**, *italic*) into React elements,
- * and strips leftover # or * symbols.
- */
-function cleanInline(text) {
-  // Split by **bold** segments
-  const parts = text.split(/(\*\*[^*]+\*\*)/g);
-  return parts.map((part, i) => {
-    // Bold
-    const boldMatch = part.match(/^\*\*(.+)\*\*$/);
-    if (boldMatch) {
-      return <strong key={i} className="font-semibold text-slate-900 dark:text-white">{boldMatch[1]}</strong>;
-    }
-    // Clean leftover stray * or # that aren't part of syntax
-    const cleaned = part.replace(/(?<!\w)\*(?!\*)/g, '').replace(/#+/g, '').trim();
-    return cleaned ? <span key={i}>{cleaned}</span> : null;
-  });
-}
 
 export default function LegalQuery() {
   const [question, setQuestion] = useState('');
   const [queries, setQueries] = useState([]);
   const [loading, setLoading] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [queryError, setQueryError] = useState(null);
   const { t } = useLanguage();
   const bottomRef = useRef(null);
   const [searchParams, setSearchParams] = useSearchParams();
@@ -104,7 +22,7 @@ export default function LegalQuery() {
   const fetchQueries = async () => {
     setLoading(true);
     try {
-      const { data } = await api.get('/queries');
+      const { data } = await api.get('/queries?type=chatbot');
       setQueries(data.data || data);
     } catch {
       setQueries([]);
@@ -128,6 +46,15 @@ export default function LegalQuery() {
       hasAutoSubmitted.current = true;
       // Clear the URL parameter so it doesn't re-submit on refresh
       setSearchParams({}, { replace: true });
+
+      // Validate before auto-submitting
+      const { valid, reason } = validateChatQuery(queryFromHome);
+      if (!valid) {
+        setQueryError(reason);
+        setQuestion(queryFromHome);
+        return;
+      }
+
       // Auto-submit the question
       const autoSubmit = async () => {
         setSubmitLoading(true);
@@ -148,6 +75,14 @@ export default function LegalQuery() {
     e.preventDefault();
     if (!question.trim()) return;
 
+    // Validate for gibberish / non-legal content
+    const { valid, reason } = validateChatQuery(question.trim());
+    if (!valid) {
+      setQueryError(reason);
+      return;
+    }
+
+    setQueryError(null);
     const userQuestion = question.trim();
     setQuestion('');
     setSubmitLoading(true);
@@ -166,7 +101,7 @@ export default function LegalQuery() {
     if (!window.confirm("Are you sure you want to clear your entire chat history? This action cannot be undone.")) return;
 
     try {
-      await api.delete('/queries/clear-all');
+      await api.delete('/queries/clear-all?type=chatbot');
       // Re-fetch to keep saved queries
       fetchQueries();
     } catch (err) {
@@ -244,7 +179,7 @@ export default function LegalQuery() {
                     <div className="flex flex-col items-start w-full">
                       <div className="bg-white dark:bg-slate-800 text-default px-5 py-4 rounded-2xl rounded-tl-sm shadow-sm border border-slate-100 dark:border-slate-700 w-full overflow-hidden">
                         <div className="max-w-none">
-                          <FormattedResponse text={q.response} />
+                          <FormattedAIResponse text={q.response} />
                         </div>
                         
                         {/* --- Footer Actions for AI Response --- */}
@@ -310,11 +245,18 @@ export default function LegalQuery() {
       <div className="pt-4 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900 rounded-b-xl">
         <form
           onSubmit={handleSubmit}
-          className="flex items-end gap-3 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-2xl border border-slate-200 dark:border-slate-700 focus-within:ring-2 focus-within:ring-indigo-500/50 focus-within:border-indigo-500 transition-all"
+          className={`flex items-end gap-3 bg-slate-50 dark:bg-slate-800/50 p-2 rounded-2xl border transition-all ${
+            queryError
+              ? 'border-red-400 dark:border-red-500 ring-2 ring-red-400/30'
+              : 'border-slate-200 dark:border-slate-700 focus-within:ring-2 focus-within:ring-indigo-500/50 focus-within:border-indigo-500'
+          }`}
         >
           <textarea
             value={question}
-            onChange={(e) => setQuestion(e.target.value)}
+            onChange={(e) => {
+              setQuestion(e.target.value);
+              if (queryError) setQueryError(null);
+            }}
             onKeyDown={(e) => {
               if (e.key === 'Enter' && !e.shiftKey) {
                 e.preventDefault();
@@ -347,6 +289,15 @@ export default function LegalQuery() {
             )}
           </button>
         </form>
+
+        {/* Inline validation error */}
+        {queryError && (
+          <div className="mt-2 flex items-center gap-2 text-xs text-red-600 dark:text-red-400 font-medium px-3 py-2 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800/40 rounded-xl animate-in fade-in slide-in-from-top-1 duration-200">
+            <span className="text-base leading-none">⚠️</span>
+            <span>{queryError}</span>
+          </div>
+        )}
+
         <div className="text-center mt-3 mb-1">
           <p className="text-[10px] text-slate-400 font-medium">LawMate AI can make mistakes. Consider verifying important information with a human advocate.</p>
         </div>

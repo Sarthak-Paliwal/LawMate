@@ -12,12 +12,14 @@ import LegalQuery from './pages/LegalQuery';
 import LegalActs from './pages/LegalActs';
 import LegalActDetail from './pages/LegalActDetail';
 import Advocates from './pages/Advocates';
+import AdvocateDetail from './pages/AdvocateDetail';
 import AdvocateProfile from './pages/AdvocateProfile';
 import Bookings from './pages/Bookings';
 import QueryResolver from './pages/QueryResolver';
 import DocumentGenerator from './pages/DocumentGenerator';
 import AdvocateDashboard from './pages/AdvocateDashboard';
 import AdminDashboard from './pages/AdminDashboard';
+import ChatNotifier from './components/ChatNotifier';
 
 /* -------------------- Public Route Guard -------------------- */
 
@@ -54,6 +56,7 @@ function App() {
           },
         }}
       />
+      <ChatNotifier />
       <Layout>
         <Routes>
           {/* Public Routes */}
@@ -114,6 +117,15 @@ function App() {
             element={
               <ProtectedRoute role="user">
                 <Advocates />
+              </ProtectedRoute>
+            }
+          />
+
+          <Route
+            path="/advocates/:id"
+            element={
+              <ProtectedRoute role="user">
+                <AdvocateDetail />
               </ProtectedRoute>
             }
           />

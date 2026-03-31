@@ -35,7 +35,10 @@ export default function Register() {
 
   const validate = () => {
     const errors = {};
-    if (!form.name) errors.name = t('nameRequired') || 'Name is required';
+    if (!form.name.trim()) errors.name = t('nameRequired') || 'Name is required';
+    else if (!/^[A-Za-z\s]+$/.test(form.name.trim())) errors.name = 'Name must contain only letters and spaces';
+    else if (form.name.trim().length < 2) errors.name = 'Name must be at least 2 characters';
+
     if (!form.email) errors.email = t('emailRequired') || 'Email is required';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) errors.email = t('emailInvalid') || 'Email is invalid';
     
@@ -44,11 +47,12 @@ export default function Register() {
     
     if (form.password !== form.confirmPassword) errors.confirmPassword = 'Passwords do not match';
 
-    if (form.phone && !/^\d{10}$/.test(form.phone)) errors.phone = 'Phone number must be 10 digits';
+    if (form.phone && !/^\d{10}$/.test(form.phone)) errors.phone = 'Phone number must be exactly 10 digits';
     
     if (form.role === 'advocate') {
       if (!form.barCouncilId) errors.barCouncilId = 'Bar Council ID is required';
       if (!form.enrollmentYear) errors.enrollmentYear = 'Enrollment Year is required';
+      else if (!/^\d{4}$/.test(form.enrollmentYear)) errors.enrollmentYear = 'Enter a valid 4-digit year';
       if (!form.stateBarCouncil) errors.stateBarCouncil = 'State Bar Council is required';
     }
 
@@ -127,11 +131,15 @@ export default function Register() {
             label={t('name')}
             type="text"
             value={form.name}
-            onChange={(e) =>
-              setForm((f) => ({ ...f, name: e.target.value }))
-            }
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val === '' || /^[A-Za-z\s]*$/.test(val)) {
+                setForm((f) => ({ ...f, name: val }));
+              }
+            }}
             error={fieldErrors.name}
             className={fieldErrors.name ? 'field-error' : ''}
+            placeholder="e.g. John Doe"
             required
           />
 
@@ -176,11 +184,16 @@ export default function Register() {
             label={t('phone')}
             type="tel"
             value={form.phone}
-            onChange={(e) =>
-              setForm((f) => ({ ...f, phone: e.target.value }))
-            }
+            onChange={(e) => {
+              const val = e.target.value;
+              if (val === '' || /^\d*$/.test(val)) {
+                setForm((f) => ({ ...f, phone: val.slice(0, 10) }));
+              }
+            }}
             error={fieldErrors.phone}
             className={fieldErrors.phone ? 'field-error' : ''}
+            placeholder="e.g. 9876543210"
+            maxLength={10}
           />
 
           {/* Role Selector */}

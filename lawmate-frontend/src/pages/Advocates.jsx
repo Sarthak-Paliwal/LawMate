@@ -4,20 +4,32 @@ import { useLanguage } from '../i18n/LanguageContext';
 import { useAuth } from '../context/AuthContext';
 import { useGetAdvocatesQuery } from '../store/services/lawmateApi';
 import BookAdvocateModal from '../components/BookAdvocateModal';
+import AdvocateComparisonModal from '../components/AdvocateComparisonModal';
 
 export default function Advocates() {
-  const [selectedAdvocate, setSelectedAdvocate] = useState(null);
+  const [selectedAdvocateBooking, setSelectedAdvocateBooking] = useState(null);
+  const [compareList, setCompareList] = useState([]); // max 2 advocates
+  const [showCompareModal, setShowCompareModal] = useState(false);
   const [filters, setFilters] = useState({
     specialization: '',
     sortBy: 'score'
   });
 
-  const handleBookClick = (adv) => {
+  const handleBookFromDetails = (adv) => {
     if (!user) {
       navigate('/login', { state: { from: '/advocates' } });
       return;
     }
-    setSelectedAdvocate(adv);
+    setSelectedAdvocateBooking(adv);
+  };
+
+  const toggleCompare = (adv) => {
+    setCompareList((prev) => {
+      const exists = prev.find((a) => a.user._id === adv.user._id);
+      if (exists) return prev.filter((a) => a.user._id !== adv.user._id);
+      if (prev.length >= 2) return prev; // cap at 2
+      return [...prev, adv];
+    });
   };
 
   const { t } = useLanguage();
@@ -36,7 +48,7 @@ export default function Advocates() {
 
 
   return (
-    <div>
+    <div className={compareList.length > 0 ? 'pb-28' : ''}>
 
       {/* Header & Filters */}
       <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -163,7 +175,7 @@ export default function Advocates() {
                   </div>
                   <div className="space-y-1">
                      <p className="text-[10px] text-muted uppercase tracking-wider font-semibold">Consultation</p>
-                     <p className="text-sm font-medium text-indigo-600 dark:text-indigo-400">₹{adv.hourlyRate}/hr</p>
+                     <p className="text-sm font-medium text-emerald-600 dark:text-emerald-400">₹{adv.consultationFee || 'TBD'}</p>
                   </div>
                 </div>
                 
@@ -182,31 +194,88 @@ export default function Advocates() {
                 </div>
               </div>
 
-              {/* Action Button */}
-              <button
-                type="button"
-                onClick={() => handleBookClick(adv)}
-                disabled={adv.isAvailable === false}
-                className={`mt-6 w-full py-2 rounded-md transition shadow-sm font-medium ${
-                  adv.isAvailable === false 
-                    ? 'bg-slate-100 text-slate-400 cursor-not-allowed border border-slate-200 dark:bg-slate-800 dark:border-slate-700' 
-                    : 'bg-indigo-600 text-white hover:bg-indigo-700'
-                }`}
-              >
-                {adv.isAvailable === false ? t('notTakingBookings') : t('bookAdvocate')}
-              </button>
+              {/* Compare + View Buttons */}
+              <div className="mt-6 flex gap-2">
+                <button
+                  type="button"
+                  onClick={() => toggleCompare(adv)}
+                  className={`flex-1 py-2 rounded-md text-sm font-medium transition border ${
+                    compareList.find((c) => c.user._id === adv.user._id)
+                      ? 'bg-indigo-600 text-white border-indigo-600'
+                      : compareList.length >= 2
+                      ? 'bg-slate-100 text-slate-400 border-slate-200 cursor-not-allowed dark:bg-slate-800 dark:border-slate-700'
+                      : 'bg-white text-indigo-500 border-indigo-200 hover:border-indigo-400 dark:bg-slate-800 dark:border-slate-700'
+                  }`}
+                  disabled={compareList.length >= 2 && !compareList.find((c) => c.user._id === adv.user._id)}
+                >
+                  {compareList.find((c) => c.user._id === adv.user._id) ? '✓ Selected' : '+ Compare'}
+                </button>
+                <button
+                  type="button"
+                  onClick={() => navigate(`/advocates/${adv.user._id}`, { state: { advocate: adv } })}
+                  className="flex-1 py-2 rounded-md transition shadow-sm font-medium text-sm bg-white text-indigo-600 border border-slate-200 hover:border-indigo-300 dark:bg-slate-800 dark:border-slate-700 dark:hover:border-indigo-600"
+                >
+                  View Details
+                </button>
+              </div>
             </li>
           ))}
         </ul>
       )}
 
-      {/* Booking Modal */}
-      {selectedAdvocate && (
+      {/* Modals */}
+      {selectedAdvocateBooking && (
         <BookAdvocateModal
-          advocate={selectedAdvocate}
-          onClose={() => setSelectedAdvocate(null)}
-          onSuccess={() => navigate('/bookings')}
+          advocate={selectedAdvocateBooking}
+          onClose={() => setSelectedAdvocateBooking(null)}
+          onSuccess={() => {
+            setSelectedAdvocateBooking(null);
+            navigate('/bookings');
+          }}
         />
+      )}
+
+      {showCompareModal && compareList.length === 2 && (
+        <AdvocateComparisonModal
+          advocateA={compareList[0]}
+          advocateB={compareList[1]}
+          onClose={() => setShowCompareModal(false)}
+        />
+      )}
+
+      {/* Floating Compare Bar */}
+      {compareList.length > 0 && (
+        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[1000] flex items-center gap-4 px-6 py-3.5 rounded-2xl bg-indigo-700 text-white shadow-2xl shadow-indigo-500/30 border border-indigo-500/30 animate-fade-in">
+          <div className="flex items-center gap-3 text-sm">
+            {compareList.map((a, i) => (
+              <div key={i} className="flex items-center gap-2">
+                <div className="w-7 h-7 rounded-full bg-white/20 overflow-hidden flex items-center justify-center font-bold text-xs">
+                  {a.profilePicture
+                    ? <img src={a.profilePicture} alt="" className="w-full h-full object-cover" />
+                    : a.user?.name?.charAt(0)}
+                </div>
+                <span className="font-semibold text-sm">{a.user?.name?.split(' ')[0]}</span>
+                {i === 0 && compareList.length === 2 && <span className="text-indigo-300 text-xs">vs</span>}
+              </div>
+            ))}
+          </div>
+          {compareList.length === 2 ? (
+            <button
+              onClick={() => setShowCompareModal(true)}
+              className="px-4 py-1.5 rounded-xl bg-white text-indigo-700 font-bold text-sm hover:bg-indigo-50 transition shadow-md"
+            >
+              ⚡ Compare Now
+            </button>
+          ) : (
+            <span className="text-indigo-300 text-xs italic">Select 1 more advocate…</span>
+          )}
+          <button
+            onClick={() => setCompareList([])}
+            className="ml-1 w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs transition"
+          >
+            ✕
+          </button>
+        </div>
       )}
     </div>
   );

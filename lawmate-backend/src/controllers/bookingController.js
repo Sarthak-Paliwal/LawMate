@@ -132,3 +132,56 @@ exports.rateBooking = async (req, res, next) => {
     next(err);
   }
 };
+
+/* -------------------- Propose Appointment Slots -------------------- */
+
+exports.proposeSlots = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { slots } = req.body;
+
+    const booking = await bookingService.proposeSlots(
+      id,
+      req.user._id,
+      slots
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: booking
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+/* -------------------- Confirm Appointment Slot -------------------- */
+
+exports.confirmSlot = async (req, res, next) => {
+  try {
+    const { id } = req.params;
+    const { slotIndex } = req.body;
+
+    if (slotIndex === undefined || slotIndex === null) {
+      return res.status(400).json({
+        status: "fail",
+        message: "slotIndex is required"
+      });
+    }
+
+    const booking = await bookingService.confirmSlot(
+      id,
+      req.user._id,
+      Number(slotIndex)
+    );
+
+    res.status(200).json({
+      status: "success",
+      data: booking
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};

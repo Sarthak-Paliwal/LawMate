@@ -37,6 +37,10 @@ export default function AdvocateProfile() {
       hourlyRate: profile.hourlyRate ?? '',
       isAvailable: profile.isAvailable !== false,
       location: profile.location || '',
+      casesHandled: profile.casesHandled ?? '',
+      casesWon: profile.casesWon ?? '',
+      qualifications: profile.qualifications || '',
+      consultationFee: profile.consultationFee ?? ''
     });
   }
 
@@ -56,11 +60,23 @@ export default function AdvocateProfile() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
+
+    const handled = form.casesHandled === '' ? 0 : Number(form.casesHandled);
+    const won = form.casesWon === '' ? 0 : Number(form.casesWon);
+
+    if (won > handled) {
+      setMessage('error-cases');
+      return;
+    }
+
     try {
       await updateProfile({
         ...form,
         experience: form.experience === '' ? 0 : Number(form.experience),
         hourlyRate: form.hourlyRate === '' ? undefined : Number(form.hourlyRate),
+        consultationFee: form.consultationFee === '' ? undefined : Number(form.consultationFee),
+        casesHandled: handled,
+        casesWon: won
       }).unwrap();
       setMessage('success');
     } catch {
@@ -185,7 +201,7 @@ export default function AdvocateProfile() {
           <div className={`px-4 py-2 rounded-md text-sm ${
             message === 'success' ? 'bg-green-50 text-green-700 border border-green-200' : 'bg-red-50 text-red-700 border border-red-200'
           }`}>
-            {message === 'success' ? t('profileUpdated') : t('errorGeneric')}
+            {message === 'success' ? t('profileUpdated') : message === 'error-cases' ? 'Cases won cannot be greater than cases fought.' : t('errorGeneric')}
           </div>
         )}
 
@@ -195,6 +211,14 @@ export default function AdvocateProfile() {
           <textarea name="bio" autoComplete="off" value={form.bio}
             onChange={(e) => setForm((f) => ({ ...f, bio: e.target.value }))}
             className="input min-h-[100px] focus:ring-2 focus:ring-indigo-500" />
+        </div>
+
+        {/* Qualifications */}
+        <div>
+          <h2 className="text-lg font-semibold text-default mb-3">Educational Qualifications</h2>
+          <textarea name="qualifications" autoComplete="off" value={form.qualifications}
+            onChange={(e) => setForm((f) => ({ ...f, qualifications: e.target.value }))}
+            className="input min-h-[80px] focus:ring-2 focus:ring-indigo-500" placeholder="e.g. B.A. LL.B., LL.M. (Corporate Law)" />
         </div>
 
         {/* Specialization */}
@@ -218,8 +242,8 @@ export default function AdvocateProfile() {
           </div>
         </div>
 
-        {/* Experience, Bar Council, Rate */}
-        <div className="grid sm:grid-cols-2 gap-6">
+        {/* Experience, Bar Council, Rate, Cases */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           <div>
             <label className="block text-sm font-medium text-default mb-1">{t('experience')}</label>
             <input type="number" name="experience" autoComplete="off" min="0" value={form.experience}
@@ -233,10 +257,28 @@ export default function AdvocateProfile() {
               className="input focus:ring-2 focus:ring-indigo-500" placeholder="e.g. MAH/1234/2020" />
           </div>
           <div>
-            <label className="block text-sm font-medium text-default mb-1">Hourly Rate (₹)</label>
+            <label className="block text-sm font-medium text-default mb-1">Hearing Charges (₹)</label>
             <input type="number" name="hourlyRate" autoComplete="off" min="0" value={form.hourlyRate}
               onChange={(e) => setForm((f) => ({ ...f, hourlyRate: e.target.value }))}
+              className="input focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 5000" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-default mb-1">Consulting Charges (₹)</label>
+            <input type="number" name="consultationFee" autoComplete="off" min="0" value={form.consultationFee}
+              onChange={(e) => setForm((f) => ({ ...f, consultationFee: e.target.value }))}
               className="input focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 1500" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-default mb-1">Cases Fought</label>
+            <input type="number" name="casesHandled" autoComplete="off" min="0" value={form.casesHandled}
+              onChange={(e) => setForm((f) => ({ ...f, casesHandled: e.target.value }))}
+              className="input focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 150" />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-default mb-1">Cases Won</label>
+            <input type="number" name="casesWon" autoComplete="off" min="0" value={form.casesWon}
+              onChange={(e) => setForm((f) => ({ ...f, casesWon: e.target.value }))}
+              className="input focus:ring-2 focus:ring-indigo-500" placeholder="e.g. 120" />
           </div>
         </div>
 

@@ -137,6 +137,15 @@ export const lawmateApi = createApi({
       providesTags: ['AdvocateList'],
     }),
 
+    compareAdvocates: builder.mutation({
+      query: (body) => ({
+        url: '/advocates/compare',
+        method: 'POST',
+        body,
+      }),
+      transformResponse: (res) => res.data,
+    }),
+
     /* ───────── Bookings ───────── */
 
     getBookings: builder.query({
@@ -170,6 +179,30 @@ export const lawmateApi = createApi({
         body: { rating },
       }),
       invalidatesTags: ['Bookings'],
+    }),
+
+    proposeSlots: builder.mutation({
+      query: ({ bookingId, slots }) => ({
+        url: `/bookings/${bookingId}/propose-slots`,
+        method: 'PATCH',
+        body: { slots },
+      }),
+      invalidatesTags: ['Bookings'],
+    }),
+
+    confirmSlot: builder.mutation({
+      query: ({ bookingId, slotIndex }) => ({
+        url: `/bookings/${bookingId}/confirm-slot`,
+        method: 'PATCH',
+        body: { slotIndex },
+      }),
+      invalidatesTags: ['Bookings'],
+    }),
+
+    getChatMessages: builder.query({
+      query: (bookingId) => `/chat/${bookingId}`,
+      transformResponse: (res) => res.data,
+      providesTags: ['ChatMessages'],
     }),
 
     /* ───────── Queries (Legal Chat) ───────── */
@@ -276,11 +309,15 @@ export const {
   useUploadAdvocateProfilePictureMutation,
   // Advocates directory
   useGetAdvocatesQuery,
+  useCompareAdvocatesMutation,
   // Bookings
   useGetBookingsQuery,
   useCreateBookingMutation,
   useUpdateBookingStatusMutation,
   useRateBookingMutation,
+  useProposeSlotsMutation,
+  useConfirmSlotMutation,
+  useGetChatMessagesQuery,
   // Queries
   useGetQueriesQuery,
   useCreateQueryMutation,

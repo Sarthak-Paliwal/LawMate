@@ -25,6 +25,7 @@ app.use('/api/queries', require('./routes/queryRoutes'));
 app.use('/api/legal-acts', require('./routes/legalActRoutes'));
 app.use('/api/advocates', require('./routes/advocateRoutes'));
 app.use('/api/bookings', require('./routes/bookingRoutes'));
+app.use('/api/chat', require('./routes/chatRoutes'));
 app.use('/api/documents', require('./routes/documentRoutes'));
 app.use('/api/admin', require('./routes/adminRoutes'));
 

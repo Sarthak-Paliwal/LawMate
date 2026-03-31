@@ -3,6 +3,37 @@ const decisionService = require('../services/decisionService');
 const aiService = require('../services/aiService');
 const queryService = require('../services/queryService');
 
+/**
+ * Lightweight server-side gibberish detector.
+ * Returns true if the text is likely random/non-meaningful input.
+ */
+function isGibberish(text) {
+  if (!text || typeof text !== 'string') return true;
+  const t = text.trim();
+  if (t.length < 10) return false; // short inputs are checked by length alone
+
+  // Repeated characters: aaaaa, jjjjjj
+  if ((/(.)(\1){4,}/).test(t)) return true;
+
+  const cleaned = t.toLowerCase().replace(/[^a-z]/g, '');
+  if (cleaned.length === 0) return true;
+
+  // Vowel ratio check
+  const vowels = (cleaned.match(/[aeiou]/g) || []).length;
+  const ratio = vowels / cleaned.length;
+  if (cleaned.length > 10 && (ratio < 0.10 || ratio > 0.92)) return true;
+
+  // Long consonant clusters without vowels
+  if ((/[^aeiou ]{9,}/).test(cleaned)) return true;
+
+  // Mostly numbers/symbols
+  const letters = (t.match(/[a-zA-Z]/g) || []).length;
+  if (t.length > 8 && letters / t.length < 0.35) return true;
+
+  return false;
+}
+
+
 exports.analyzeQuery = async (req, res, next) => {
   try {
     const { category, subcategory, description } = req.body;
@@ -11,6 +42,13 @@ exports.analyzeQuery = async (req, res, next) => {
       return res.status(400).json({
         status: 'fail',
         message: 'Description is required',
+      });
+    }
+
+    if (isGibberish(description)) {
+      return res.status(422).json({
+        status: 'fail',
+        message: 'Your query does not appear to describe a valid legal situation. Please provide a clear description of your problem.',
       });
     }
 
@@ -41,6 +79,7 @@ exports.analyzeQuery = async (req, res, next) => {
     // 4. Save to Database
     const newQuery = await LegalQuery.create({
         user: req.user.id,
+        queryType: 'resolver',
         category,
         subCategory: subcategory,
         description,
@@ -78,6 +117,13 @@ exports.createQuery = async (req, res, next) => {
       });
     }
 
+    if (isGibberish(question)) {
+      return res.status(422).json({
+        status: 'fail',
+        message: 'Your query does not appear to be a valid question. Please describe your legal concern clearly.',
+      });
+    }
+
     const query = await queryService.createQuery(req.user.id, question);
 
     res.status(201).json({
@@ -94,7 +140,12 @@ exports.createQuery = async (req, res, next) => {
 
 exports.getMyQueries = async (req, res, next) => {
   try {
-    const queries = await LegalQuery.find({ user: req.user.id }).sort('-createdAt');
+    const filter = { user: req.user.id };
+    if (req.query.type) {
+      filter.queryType = req.query.type;
+    }
+    
+    const queries = await LegalQuery.find(filter).sort('-createdAt');
     res.status(200).json({
       status: 'success',
       results: queries.length,
@@ -186,7 +237,11 @@ exports.saveQuery = async (req, res, next) => {
 
 exports.clearAllQueries = async (req, res, next) => {
   try {
-    await LegalQuery.deleteMany({ user: req.user.id, isSaved: { $ne: true } });
+    const filter = { user: req.user.id, isSaved: { $ne: true } };
+    if (req.query.type) {
+      filter.queryType = req.query.type;
+    }
+    await LegalQuery.deleteMany(filter);
 
     res.status(200).json({
       status: 'success',

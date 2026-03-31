@@ -91,7 +91,11 @@ exports.getProfile = async (userId) => {
        isAvailable: false,
        location: '',
        rating: 0,
-       reviewCount: 0
+       reviewCount: 0,
+       casesHandled: 0,
+       casesWon: 0,
+       qualifications: '',
+       consultationFee: 0
     };
   }
 
@@ -121,7 +125,11 @@ exports.upsertProfile = async (userId, body) => {
     'barCouncilNumber',
     'hourlyRate',
     'isAvailable',
-    'location'
+    'location',
+    'casesHandled',
+    'casesWon',
+    'qualifications',
+    'consultationFee'
   ];
 
   allowedFields.forEach(field => {

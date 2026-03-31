@@ -13,6 +13,11 @@ const advocateProfileSchema = new mongoose.Schema({
     trim: true 
   },
 
+  qualifications: {
+    type: String,
+    trim: true
+  },
+
   specialization: [{ 
     type: String, 
     trim: true 
@@ -30,6 +35,10 @@ const advocateProfileSchema = new mongoose.Schema({
 
   hourlyRate: { 
     type: Number 
+  },
+
+  consultationFee: {
+    type: Number
   },
 
   location: {
@@ -55,6 +64,11 @@ const advocateProfileSchema = new mongoose.Schema({
   },
 
   casesHandled: {
+    type: Number,
+    default: 0
+  },
+
+  casesWon: {
     type: Number,
     default: 0
   },

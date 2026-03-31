@@ -57,14 +57,11 @@ exports.getAdvocateBookings = async (advocateId) => {
     .lean();
 };
 
-/* -------------------- Update Booking Status -------------------- */
+/* -------------------- Propose Appointment Slots -------------------- */
 
-exports.updateStatus = async (bookingId, advocateId, status) => {
-
-  const allowedStatuses = ['accepted', 'rejected', 'completed'];
-
-  if (!allowedStatuses.includes(status)) {
-    const e = new Error("Invalid status");
+exports.proposeSlots = async (bookingId, advocateId, slots) => {
+  if (!slots || !Array.isArray(slots) || slots.length < 1 || slots.length > 3) {
+    const e = new Error("Please provide 1 to 3 appointment slots");
     e.statusCode = 400;
     throw e;
   }
@@ -80,15 +77,87 @@ exports.updateStatus = async (bookingId, advocateId, status) => {
     throw e;
   }
 
-  // Enforce proper workflow transitions
+  if (booking.status !== 'pending') {
+    const e = new Error("Slots can only be proposed for pending bookings");
+    e.statusCode = 400;
+    throw e;
+  }
+
+  booking.proposedSlots = slots.map(s => ({
+    date: new Date(s.date),
+    time: s.time
+  }));
+  booking.status = 'slots_proposed';
+  await booking.save();
+
+  return booking;
+};
+
+/* -------------------- Confirm Appointment Slot -------------------- */
+
+exports.confirmSlot = async (bookingId, userId, slotIndex) => {
+  const booking = await Booking.findOne({
+    _id: bookingId,
+    user: userId
+  });
+
+  if (!booking) {
+    const e = new Error("Booking not found");
+    e.statusCode = 404;
+    throw e;
+  }
+
+  if (booking.status !== 'slots_proposed') {
+    const e = new Error("No slots to confirm for this booking");
+    e.statusCode = 400;
+    throw e;
+  }
+
+  if (slotIndex < 0 || slotIndex >= booking.proposedSlots.length) {
+    const e = new Error("Invalid slot selection");
+    e.statusCode = 400;
+    throw e;
+  }
+
+  const chosen = booking.proposedSlots[slotIndex];
+  booking.confirmedSlot = { date: chosen.date, time: chosen.time };
+  booking.status = 'accepted';
+  await booking.save();
+
+  return booking;
+};
+
+/* -------------------- Update Booking Status -------------------- */
+
+exports.updateStatus = async (bookingId, advocateId, status) => {
+
+  const allowedStatuses = ['rejected', 'completed'];
+
+  if (!allowedStatuses.includes(status)) {
+    const e = new Error("Invalid status. Use propose-slots to accept, or reject/complete.");
+    e.statusCode = 400;
+    throw e;
+  }
+
+  const booking = await Booking.findOne({
+    _id: bookingId,
+    advocate: advocateId
+  });
+
+  if (!booking) {
+    const e = new Error("Booking not found");
+    e.statusCode = 404;
+    throw e;
+  }
+
   if (booking.status === 'rejected') {
     const e = new Error("Rejected bookings cannot be modified");
     e.statusCode = 400;
     throw e;
   }
 
-  if (booking.status === 'pending' && !['accepted', 'rejected'].includes(status)) {
-    const e = new Error("Pending bookings can only be accepted or rejected");
+  if (booking.status === 'pending' && status !== 'rejected') {
+    const e = new Error("Pending bookings can only be rejected here. Use propose-slots to accept.");
     e.statusCode = 400;
     throw e;
   }

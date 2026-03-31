@@ -20,8 +20,18 @@ const bookingSchema = new mongoose.Schema({
 
   status: {
     type: String,
-    enum: ['pending', 'accepted', 'rejected', 'completed'],
+    enum: ['pending', 'slots_proposed', 'accepted', 'rejected', 'completed'],
     default: 'pending',
+  },
+
+  proposedSlots: [{
+    date: { type: Date, required: true },
+    time: { type: String, required: true }
+  }],
+
+  confirmedSlot: {
+    date: { type: Date },
+    time: { type: String }
   },
 
   rating: {

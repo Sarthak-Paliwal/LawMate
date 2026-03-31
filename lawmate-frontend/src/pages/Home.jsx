@@ -261,7 +261,11 @@ export default function Home() {
             [1, 2, 3].map(i => <div key={i} className="h-64 bg-slate-50 dark:bg-slate-800/50 rounded-2xl animate-pulse" />)
           ) : topAdvocates.length > 0 ? (
             topAdvocates.map((adv) => (
-              <Card key={adv._id} className="p-6 border-slate-200 dark:border-slate-800 flex flex-col justify-between group hover:border-indigo-200 transition-all">
+              <Card
+                key={adv._id}
+                className="p-6 border-slate-200 dark:border-slate-800 flex flex-col justify-between group hover:border-indigo-200 transition-all cursor-pointer"
+                onClick={() => navigate(`/advocates/${adv._id}`)}
+              >
                 <div>
                   <div className="flex items-center gap-4 mb-5">
                     <div className="w-10 h-10 rounded-full bg-indigo-100 flex items-center justify-center text-indigo-600 font-bold">

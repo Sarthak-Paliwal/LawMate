@@ -1,4 +1,5 @@
 const advocateService = require('../services/advocateService');
+const aiService = require('../services/aiService');
 
 /* -------------------- List Advocates -------------------- */
 
@@ -100,6 +101,30 @@ exports.uploadProfilePicture = async (req, res, next) => {
     res.status(200).json({
       status: "success",
       data: { profilePicture: profile.profilePicture }
+    });
+
+  } catch (err) {
+    next(err);
+  }
+};
+
+/* -------------------- Compare Advocates (AI) -------------------- */
+exports.compareAdvocates = async (req, res, next) => {
+  try {
+    const { advocateA, advocateB, useCase } = req.body;
+
+    if (!advocateA || !advocateB) {
+      return res.status(400).json({
+        status: "fail",
+        message: "Please provide both advocates to compare."
+      });
+    }
+
+    const aiComparison = await aiService.generateAdvocateComparison(advocateA, advocateB, useCase);
+
+    res.status(200).json({
+      status: "success",
+      data: aiComparison
     });
 
   } catch (err) {

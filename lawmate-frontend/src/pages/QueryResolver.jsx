@@ -10,6 +10,7 @@ import { useLanguage } from '../i18n/LanguageContext';
 import api from '../api/axios';
 import { useAuth } from '../context/AuthContext';
 import AuthModal from '../components/auth/AuthModal';
+import { validateQuery } from '../utils/validateQuery';
 
 const TOTAL_STEPS = 4;
 
@@ -50,8 +51,10 @@ export default function QueryResolver() {
         return !!formData.category;
       case 2:
         return !!formData.subcategory;
-      case 3:
-        return formData.description.length >= 20;
+      case 3: {
+        const { valid } = validateQuery(formData.description);
+        return valid;
+      }
       default:
         return true;
     }
@@ -75,6 +78,14 @@ export default function QueryResolver() {
   }, [user, pendingSubmit]);
 
   const submitQuery = async () => {
+    // Final client-side guard — reject gibberish before hitting the API
+    const { valid, reason } = validateQuery(formData.description);
+    if (!valid) {
+      alert(`Invalid query: ${reason}`);
+      setStep(3); // Send user back to description step
+      return;
+    }
+
     setLoading(true);
     try {
       const { data } = await api.post('/queries/analyze', formData);

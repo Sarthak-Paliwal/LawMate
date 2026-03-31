@@ -92,3 +92,67 @@ exports.generateLegalResponse = async (question) => {
     return "We are currently experiencing high traffic. Please try again in a moment.";
   }
 };
+
+exports.generateAdvocateComparison = async (advA, advB, useCase) => {
+  const prompt = `
+    You are an expert legal matchmaking AI.
+    A user has requested a comparison between two advocates for their specific legal situation.
+
+    User's Specific Legal Situation / Use Case:
+    "${useCase || 'General legal advice'}"
+
+    ${advA.name}:
+    Experience: ${advA.experience} years
+    Consulting Fee: ₹${advA.consultationFee || 'TBD'} and Hearing Charge: ₹${advA.hourlyRate || 'TBD'}/hr
+    Win Rate Track Record: ${advA.casesWon} wins out of ${advA.casesHandled} cases
+    Specializations: ${advA.specialization?.join(', ') || 'General Law'}
+
+    ${advB.name}:
+    Experience: ${advB.experience} years
+    Consulting Fee: ₹${advB.consultationFee || 'TBD'} and Hearing Charge: ₹${advB.hourlyRate || 'TBD'}/hr
+    Win Rate Track Record: ${advB.casesWon} wins out of ${advB.casesHandled} cases
+    Specializations: ${advB.specialization?.join(', ') || 'General Law'}
+
+    IMPORTANT: Always use the advocate's actual name (${advA.name} or ${advB.name}) in your response. Never say "Advocate A" or "Advocate B".
+
+    Format your response in valid JSON with EXACTLY the following keys:
+    {
+      "keyDifferences": ["Direct factual difference using real names, e.g. '${advA.name} has X years more experience'"],
+      "summary": "A balanced 2-sentence summary using real names comparing their suitability.",
+      "recommendation": "The exact name of the recommended advocate (${advA.name} or ${advB.name}), or 'Tie' if equally matched.",
+      "reasoning": "A direct hiring recommendation sentence starting with 'You should hire [name] because ...' explaining why they are the best fit for the user's specific situation."
+    }
+  `;
+
+  const messages = [
+    { role: "system", content: "You are an analytical legal matchmaking AI. Always output valid JSON." },
+    { role: "user", content: prompt }
+  ];
+
+  try {
+    const aiResponseRaw = await groqService.getChatCompletion(messages);
+
+    let aiResponse = {};
+    const jsonStartIndex = aiResponseRaw.indexOf('{');
+    const jsonEndIndex = aiResponseRaw.lastIndexOf('}');
+
+    if (jsonStartIndex !== -1 && jsonEndIndex !== -1) {
+      const jsonString = aiResponseRaw.substring(jsonStartIndex, jsonEndIndex + 1);
+      aiResponse = JSON.parse(jsonString);
+    } else {
+      throw new Error("No JSON found in AI response");
+    }
+
+    return aiResponse;
+
+  } catch (error) {
+    console.error("AI Advocate Comparison Error:", error.message);
+    return {
+      keyDifferences: ["Could not load dynamic comparison"],
+      summary: "We could not generate an AI analysis at this moment due to high traffic.",
+      recommendation: "N/A",
+      reasoning: "Please compare their stats manually in the grid.",
+      error: true
+    };
+  }
+};
