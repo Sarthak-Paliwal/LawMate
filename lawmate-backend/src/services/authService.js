@@ -184,19 +184,29 @@ exports.verifyRegistrationOTPs = async (email, emailOtp) => {
   }
 
   // All OTPs match and aren't expired. Let's create the final User!
-  const newUser = await User.create({
+  // IMPORTANT: tempUser.password is already bcrypt-hashed by TemporaryUser's pre-save hook.
+  // We CANNOT use User.create() because User's pre-save hook would hash the already-hashed
+  // password a second time, permanently breaking all future logins.
+  // Solution: write directly to the collection, bypassing all Mongoose middleware.
+  const now = new Date();
+  const result = await User.collection.insertOne({
     name: tempUser.name,
     email: tempUser.email,
-    password: tempUser.password, // already hashed by TemporaryUser model pre-save
+    password: tempUser.password, // already bcrypt-hashed — do NOT let the hook touch this
     role: tempUser.role,
-    phone: tempUser.phone,
-    profileImage: tempUser.profileImage,
-    barCouncilId: tempUser.barCouncilId,
-    enrollmentYear: tempUser.enrollmentYear,
-    stateBarCouncil: tempUser.stateBarCouncil,
+    phone: tempUser.phone || '',
+    profileImage: tempUser.profileImage || '',
+    barCouncilId: tempUser.barCouncilId || '',
+    enrollmentYear: tempUser.enrollmentYear || null,
+    stateBarCouncil: tempUser.stateBarCouncil || '',
     isEmailVerified: true,
-    isPhoneVerified: false, // phone verifications are disabled temporarily
+    isAdvocateVerified: false,
+    isPhoneVerified: false,
+    createdAt: now,
+    updatedAt: now,
   });
+
+  const newUser = await User.findById(result.insertedId);
 
   // After generating the final user, delete the temporary one
   await TemporaryUser.deleteOne({ _id: tempUser._id });

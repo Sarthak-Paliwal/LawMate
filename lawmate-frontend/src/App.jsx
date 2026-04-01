@@ -29,10 +29,24 @@ function PublicRoute({ children }) {
   if (loading) return null;
 
   if (user) {
-    return <Navigate to="/" replace />;
+    // Admins have no home page — send them straight to the dashboard
+    return <Navigate to={user.role === 'admin' ? '/dashboard' : '/'} replace />;
   }
 
   return children;
+}
+
+/* Redirect admin away from the public home page */
+function AdminGuardedHome() {
+  const { user, loading } = useAuth();
+
+  if (loading) return null;
+
+  if (user?.role === 'admin') {
+    return <Navigate to="/dashboard" replace />;
+  }
+
+  return <Home />;
 }
 
 const DashboardSwitcher = () => {
@@ -60,7 +74,7 @@ function App() {
       <Layout>
         <Routes>
           {/* Public Routes */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<AdminGuardedHome />} />
 
           <Route
             path="/login"

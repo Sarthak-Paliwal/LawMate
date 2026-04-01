@@ -48,7 +48,7 @@ export default function Advocates() {
 
 
   return (
-    <div className={compareList.length > 0 ? 'pb-28' : ''}>
+    <div>
 
       {/* Header & Filters */}
       <div className="mb-8 flex flex-col md:flex-row md:items-end justify-between gap-4">
@@ -61,7 +61,15 @@ export default function Advocates() {
           </p>
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 items-center">
+          {compareList.length === 2 && (
+            <button
+              onClick={() => setShowCompareModal(true)}
+              className="flex items-center gap-2 px-4 py-2 rounded-lg bg-indigo-600 hover:bg-indigo-700 text-white font-semibold text-sm shadow transition-all duration-200 whitespace-nowrap"
+            >
+              ⚡ Compare Now
+            </button>
+          )}
           <select 
             className="input py-2 px-3 text-sm"
             value={filters.specialization}
@@ -243,40 +251,6 @@ export default function Advocates() {
         />
       )}
 
-      {/* Floating Compare Bar */}
-      {compareList.length > 0 && (
-        <div className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[1000] flex items-center gap-4 px-6 py-3.5 rounded-2xl bg-indigo-700 text-white shadow-2xl shadow-indigo-500/30 border border-indigo-500/30 animate-fade-in">
-          <div className="flex items-center gap-3 text-sm">
-            {compareList.map((a, i) => (
-              <div key={i} className="flex items-center gap-2">
-                <div className="w-7 h-7 rounded-full bg-white/20 overflow-hidden flex items-center justify-center font-bold text-xs">
-                  {a.profilePicture
-                    ? <img src={a.profilePicture} alt="" className="w-full h-full object-cover" />
-                    : a.user?.name?.charAt(0)}
-                </div>
-                <span className="font-semibold text-sm">{a.user?.name?.split(' ')[0]}</span>
-                {i === 0 && compareList.length === 2 && <span className="text-indigo-300 text-xs">vs</span>}
-              </div>
-            ))}
-          </div>
-          {compareList.length === 2 ? (
-            <button
-              onClick={() => setShowCompareModal(true)}
-              className="px-4 py-1.5 rounded-xl bg-white text-indigo-700 font-bold text-sm hover:bg-indigo-50 transition shadow-md"
-            >
-              ⚡ Compare Now
-            </button>
-          ) : (
-            <span className="text-indigo-300 text-xs italic">Select 1 more advocate…</span>
-          )}
-          <button
-            onClick={() => setCompareList([])}
-            className="ml-1 w-6 h-6 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-xs transition"
-          >
-            ✕
-          </button>
-        </div>
-      )}
     </div>
   );
 }

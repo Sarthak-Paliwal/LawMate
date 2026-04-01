@@ -14,80 +14,434 @@ const LegalQuery = require('../src/models/LegalQuery');
 
 const users = [
   // Regular users
-  { name: 'Rahul Sharma', email: 'rahul@example.com', password: 'password123', role: 'user', phone: '9876543210' },
-  { name: 'Priya Singh', email: 'priya@example.com', password: 'password123', role: 'user', phone: '9876543211' },
-  { name: 'Amit Gupta', email: 'amit@example.com', password: 'password123', role: 'user', phone: '9876543212' },
-  { name: 'Neha Verma', email: 'neha@example.com', password: 'password123', role: 'user', phone: '9876543213' },
-  { name: 'Vikram Patel', email: 'vikram@example.com', password: 'password123', role: 'user', phone: '9876543214' },
+  { name: 'Rahul Sharma', email: 'rahul@gmail.com', password: 'password123', role: 'user', phone: '9876543210' },
+  { name: 'Priya Singh', email: 'priya@gmail.com', password: 'password123', role: 'user', phone: '9876543211' },
+  { name: 'Amit Gupta', email: 'amit@gmail.com', password: 'password123', role: 'user', phone: '9876543212' },
+  { name: 'Neha Verma', email: 'neha@gmail.com', password: 'password123', role: 'user', phone: '9876543213' },
+  { name: 'Vikram Patel', email: 'vikram@gmail.com', password: 'password123', role: 'user', phone: '9876543214' },
 
-  // Advocates
-  { name: 'Adv. Sanjay Mehta', email: 'sanjay.advocate@example.com', password: 'password123', role: 'advocate', phone: '9988776601' },
-  { name: 'Adv. Kavita Reddy', email: 'kavita.advocate@example.com', password: 'password123', role: 'advocate', phone: '9988776602' },
-  { name: 'Adv. Rajesh Kumar', email: 'rajesh.advocate@example.com', password: 'password123', role: 'advocate', phone: '9988776603' },
-  { name: 'Adv. Deepa Nair', email: 'deepa.advocate@example.com', password: 'password123', role: 'advocate', phone: '9988776604' },
-  { name: 'Adv. Arjun Desai', email: 'arjun.advocate@example.com', password: 'password123', role: 'advocate', phone: '9988776605' },
+  // ── Advocates (Password: Password123 / email: @gmail.com) ──
+
+  // 1. Criminal Defense
+  { name: 'Adv. Sanjay Mehta', email: 'sanjay.mehta@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770001', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Kavita Reddy', email: 'kavita.reddy@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770002', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 2. Family Law
+  { name: 'Adv. Sunita Joshi', email: 'sunita.joshi@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770003', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Ramesh Iyer', email: 'ramesh.iyer@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770004', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 3. Land & Property
+  { name: 'Adv. Rajesh Kumar', email: 'rajesh.kumar@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770005', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Meena Pillai', email: 'meena.pillai@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770006', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 4. Consumer Rights
+  { name: 'Adv. Deepa Nair', email: 'deepa.nair@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770007', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Kiran Bose', email: 'kiran.bose@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770008', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 5. Cyber Law
+  { name: 'Adv. Arjun Desai', email: 'arjun.desai@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770009', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Pooja Menon', email: 'pooja.menon@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770010', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 6. Business Law
+  { name: 'Adv. Vikram Chaturvedi', email: 'vikram.chaturvedi@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770011', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Ananya Srivastava', email: 'ananya.srivastava@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770012', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 7. Employment
+  { name: 'Adv. Mohan Rao', email: 'mohan.rao@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770013', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Divya Krishnan', email: 'divya.krishnan@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770014', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 8. Constitution
+  { name: 'Adv. Harish Pandey', email: 'harish.pandey@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770015', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Shilpa Thakur', email: 'shilpa.thakur@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770016', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 9. Human Rights
+  { name: 'Adv. Farhan Sheikh', email: 'farhan.sheikh@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770017', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Nandini Ghosh', email: 'nandini.ghosh@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770018', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 10. Traffic Law
+  { name: 'Adv. Suresh Tiwari', email: 'suresh.tiwari@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770019', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Rekha Malhotra', email: 'rekha.malhotra@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770020', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 11. Health & Medical
+  { name: 'Adv. Pradeep Saxena', email: 'pradeep.saxena@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770021', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Geeta Rajan', email: 'geeta.rajan@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770022', isEmailVerified: true, isAdvocateVerified: true },
+
+  // 12. Education Law
+  { name: 'Adv. Anil Dubey', email: 'anil.dubey@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770023', isEmailVerified: true, isAdvocateVerified: true },
+  { name: 'Adv. Smita Kulkarni', email: 'smita.kulkarni@gmail.com', password: 'Password123', role: 'advocate', phone: '9988770024', isEmailVerified: true, isAdvocateVerified: true },
 ];
 
 const advocateProfiles = [
+  // 1a. Criminal Defense – Sanjay Mehta
   {
     bio: 'Senior criminal lawyer with 18 years of experience in the Supreme Court and High Courts. Specializes in bail applications, criminal appeals, and white-collar crime defense.',
     specialization: ['Criminal Defense', 'Constitution'],
     experience: 18,
     barCouncilNumber: 'MH/1234/2006',
     hourlyRate: 5000,
+    consultationFee: 1500,
     location: 'Mumbai',
     rating: 4.8,
     reviewCount: 127,
     casesHandled: 340,
+    casesWon: 290,
     isAvailable: true,
   },
+  // 1b. Criminal Defense – Kavita Reddy
   {
-    bio: 'Family law specialist handling divorce, custody, and domestic violence cases. Compassionate approach with a focus on amicable dispute resolution and mediation.',
+    bio: 'Experienced criminal advocate specializing in FIR matters, anticipatory bail, and appeals at various courts across Telangana. Known for aggressive yet ethical representation.',
+    specialization: ['Criminal Defense'],
+    experience: 12,
+    barCouncilNumber: 'TS/4321/2012',
+    hourlyRate: 3500,
+    consultationFee: 1000,
+    location: 'Hyderabad',
+    rating: 4.6,
+    reviewCount: 98,
+    casesHandled: 210,
+    casesWon: 170,
+    isAvailable: true,
+  },
+
+  // 2a. Family Law – Sunita Joshi
+  {
+    bio: 'Family law specialist handling divorce, custody disputes, and domestic violence cases. Compassionate approach with a focus on amicable dispute resolution and mediation.',
     specialization: ['Family Law', 'Human Rights'],
     experience: 12,
     barCouncilNumber: 'DL/5678/2012',
     hourlyRate: 3500,
+    consultationFee: 1200,
     location: 'Delhi',
     rating: 4.6,
     reviewCount: 89,
     casesHandled: 215,
+    casesWon: 180,
     isAvailable: true,
   },
+  // 2b. Family Law – Ramesh Iyer
+  {
+    bio: 'Dedicated family law advocate with expertise in maintenance, alimony, child custody, and property rights. Empathetic and client-centric approach for sensitive matters.',
+    specialization: ['Family Law'],
+    experience: 9,
+    barCouncilNumber: 'KL/9012/2015',
+    hourlyRate: 2800,
+    consultationFee: 900,
+    location: 'Kochi',
+    rating: 4.5,
+    reviewCount: 64,
+    casesHandled: 150,
+    casesWon: 120,
+    isAvailable: true,
+  },
+
+  // 3a. Land & Property – Rajesh Kumar
   {
     bio: 'Property and real estate law expert. Handles land disputes, title verification, RERA complaints, and property registration matters across Karnataka.',
     specialization: ['Land & Property', 'Consumer Rights'],
     experience: 15,
     barCouncilNumber: 'KA/9012/2009',
     hourlyRate: 4000,
+    consultationFee: 1300,
     location: 'Bengaluru',
     rating: 4.7,
     reviewCount: 105,
     casesHandled: 280,
+    casesWon: 240,
     isAvailable: true,
   },
+  // 3b. Land & Property – Meena Pillai
   {
-    bio: 'Cyber law and IT Act specialist. Handles data privacy, online fraud, social media defamation, and digital evidence cases. Also advises startups on compliance.',
-    specialization: ['Cyber Law', 'Business Law'],
+    bio: 'Specializes in resolving land encroachment, registration fraud, and tenancy disputes. Skilled in negotiation and civil litigation for property-related matters in Tamil Nadu.',
+    specialization: ['Land & Property'],
+    experience: 11,
+    barCouncilNumber: 'TN/6543/2013',
+    hourlyRate: 3200,
+    consultationFee: 1100,
+    location: 'Chennai',
+    rating: 4.4,
+    reviewCount: 72,
+    casesHandled: 190,
+    casesWon: 155,
+    isAvailable: true,
+  },
+
+  // 4a. Consumer Rights – Deepa Nair
+  {
+    bio: 'Consumer protection advocate with a strong track record in District and State Consumer Forums. Handles defective goods, online fraud, and service deficiency cases.',
+    specialization: ['Consumer Rights'],
     experience: 8,
     barCouncilNumber: 'TN/3456/2016',
     hourlyRate: 3000,
+    consultationFee: 800,
     location: 'Chennai',
     rating: 4.5,
     reviewCount: 56,
     casesHandled: 120,
+    casesWon: 95,
     isAvailable: true,
   },
+  // 4b. Consumer Rights – Kiran Bose
   {
-    bio: 'Employment and labor law expert with deep knowledge of Industrial Disputes Act, Factories Act, and POSH Act. Represents both employers and employees.',
+    bio: 'Fights for consumer justice including e-commerce fraud, insurance claim rejections, and FMCG product liability. Former member of the Consumer Grievance Redressal Committee.',
+    specialization: ['Consumer Rights', 'Business Law'],
+    experience: 7,
+    barCouncilNumber: 'WB/2109/2017',
+    hourlyRate: 2500,
+    consultationFee: 700,
+    location: 'Kolkata',
+    rating: 4.3,
+    reviewCount: 43,
+    casesHandled: 100,
+    casesWon: 78,
+    isAvailable: true,
+  },
+
+  // 5a. Cyber Law – Arjun Desai
+  {
+    bio: 'Cyber law and IT Act specialist. Handles data privacy, online fraud, social media defamation, and digital evidence cases. Also advises startups on compliance.',
+    specialization: ['Cyber Law', 'Business Law'],
+    experience: 8,
+    barCouncilNumber: 'GJ/3456/2016',
+    hourlyRate: 3000,
+    consultationFee: 1000,
+    location: 'Ahmedabad',
+    rating: 4.5,
+    reviewCount: 56,
+    casesHandled: 120,
+    casesWon: 98,
+    isAvailable: true,
+  },
+  // 5b. Cyber Law – Pooja Menon
+  {
+    bio: 'Expert in IT Act offences, cyberstalking, hacking prosecutions, and cryptocurrency-related legal issues. Frequently consulted by police cyber cells as an expert witness.',
+    specialization: ['Cyber Law'],
+    experience: 6,
+    barCouncilNumber: 'KL/7812/2018',
+    hourlyRate: 2800,
+    consultationFee: 900,
+    location: 'Thiruvananthapuram',
+    rating: 4.4,
+    reviewCount: 38,
+    casesHandled: 85,
+    casesWon: 68,
+    isAvailable: true,
+  },
+
+  // 6a. Business Law – Vikram Chaturvedi
+  {
+    bio: 'Corporate legal advisor specializing in company incorporation, shareholder disputes, M&A transactions, and contract drafting for Indian and multinational businesses.',
+    specialization: ['Business Law'],
+    experience: 14,
+    barCouncilNumber: 'UP/8001/2010',
+    hourlyRate: 5500,
+    consultationFee: 2000,
+    location: 'Lucknow',
+    rating: 4.7,
+    reviewCount: 91,
+    casesHandled: 250,
+    casesWon: 210,
+    isAvailable: true,
+  },
+  // 6b. Business Law – Ananya Srivastava
+  {
+    bio: 'Specializes in startup legal advisory, intellectual property protection, and commercial contract disputes. Trusted advisor to several funded startups in NCR.',
+    specialization: ['Business Law', 'Employment'],
+    experience: 9,
+    barCouncilNumber: 'DL/4523/2015',
+    hourlyRate: 4000,
+    consultationFee: 1500,
+    location: 'Noida',
+    rating: 4.6,
+    reviewCount: 67,
+    casesHandled: 175,
+    casesWon: 145,
+    isAvailable: true,
+  },
+
+  // 7a. Employment – Mohan Rao
+  {
+    bio: 'Employment and labor law expert with deep knowledge of Industrial Disputes Act, Factories Act, and POSH Act. Represents both employers and employees in labor courts.',
     specialization: ['Employment', 'Business Law'],
     experience: 20,
     barCouncilNumber: 'GJ/7890/2004',
     hourlyRate: 4500,
+    consultationFee: 1500,
     location: 'Ahmedabad',
     rating: 4.9,
     reviewCount: 150,
     casesHandled: 410,
-    isAvailable: false,
+    casesWon: 360,
+    isAvailable: true,
+  },
+  // 7b. Employment – Divya Krishnan
+  {
+    bio: "Specializes in wrongful termination cases, workplace sexual harassment (POSH), and provident fund disputes. Strong advocate for employees' rights.",
+    specialization: ['Employment'],
+    experience: 8,
+    barCouncilNumber: 'KA/3312/2016',
+    hourlyRate: 3000,
+    consultationFee: 1000,
+    location: 'Bengaluru',
+    rating: 4.5,
+    reviewCount: 59,
+    casesHandled: 140,
+    casesWon: 110,
+    isAvailable: true,
+  },
+
+  // 8a. Constitution – Harish Pandey
+  {
+    bio: 'Constitutional law expert with expertise in Article 32 petitions, fundamental rights enforcement, and public interest litigation. Has appeared in multiple landmark PILs.',
+    specialization: ['Constitution', 'Human Rights'],
+    experience: 22,
+    barCouncilNumber: 'DL/1001/2002',
+    hourlyRate: 7000,
+    consultationFee: 2500,
+    location: 'New Delhi',
+    rating: 4.9,
+    reviewCount: 185,
+    casesHandled: 500,
+    casesWon: 420,
+    isAvailable: true,
+  },
+  // 8b. Constitution – Shilpa Thakur
+  {
+    bio: 'Constitutional law practitioner focused on election law, reservation policy litigation, and writ remedies. Strong track record in High Courts across five states.',
+    specialization: ['Constitution'],
+    experience: 16,
+    barCouncilNumber: 'MH/2234/2008',
+    hourlyRate: 5500,
+    consultationFee: 2000,
+    location: 'Pune',
+    rating: 4.7,
+    reviewCount: 113,
+    casesHandled: 320,
+    casesWon: 270,
+    isAvailable: true,
+  },
+
+  // 9a. Human Rights – Farhan Sheikh
+  {
+    bio: 'Passionate human rights lawyer handling torture in custody cases, refugee rights, and tribal displacement issues. Has worked with NHRC and multiple NGOs.',
+    specialization: ['Human Rights'],
+    experience: 14,
+    barCouncilNumber: 'MH/6677/2010',
+    hourlyRate: 4000,
+    consultationFee: 1200,
+    location: 'Mumbai',
+    rating: 4.8,
+    reviewCount: 95,
+    casesHandled: 260,
+    casesWon: 215,
+    isAvailable: true,
+  },
+  // 9b. Human Rights – Nandini Ghosh
+  {
+    bio: "Advocates for marginalized communities on issues of bonded labour, child trafficking, and women's rights. Prolific RTI applicant and social justice activist-lawyer.",
+    specialization: ['Human Rights', 'Family Law'],
+    experience: 10,
+    barCouncilNumber: 'WB/5544/2014',
+    hourlyRate: 3200,
+    consultationFee: 1000,
+    location: 'Kolkata',
+    rating: 4.6,
+    reviewCount: 74,
+    casesHandled: 190,
+    casesWon: 155,
+    isAvailable: true,
+  },
+
+  // 10a. Traffic Law – Suresh Tiwari
+  {
+    bio: 'Traffic law specialist handling motor accident claims (MACT), challan disputes, DL revocations, and hit-and-run cases. Over 600 MACT petitions filed successfully.',
+    specialization: ['Traffic Law'],
+    experience: 16,
+    barCouncilNumber: 'RJ/3399/2008',
+    hourlyRate: 2500,
+    consultationFee: 800,
+    location: 'Jaipur',
+    rating: 4.6,
+    reviewCount: 130,
+    casesHandled: 620,
+    casesWon: 510,
+    isAvailable: true,
+  },
+  // 10b. Traffic Law – Rekha Malhotra
+  {
+    bio: 'Expert in motor vehicle insurance claims, drunk driving defense, and traffic challan appeals. Experienced in negotiating out-of-court settlements for accident compensation.',
+    specialization: ['Traffic Law', 'Consumer Rights'],
+    experience: 9,
+    barCouncilNumber: 'PB/7722/2015',
+    hourlyRate: 2000,
+    consultationFee: 700,
+    location: 'Chandigarh',
+    rating: 4.4,
+    reviewCount: 82,
+    casesHandled: 280,
+    casesWon: 230,
+    isAvailable: true,
+  },
+
+  // 11a. Health & Medical – Pradeep Saxena
+  {
+    bio: 'Medical negligence lawyer with a background in MBBS. Handles consumer complaints against hospitals, wrongful treatment claims, and medical license disputes before NMC.',
+    specialization: ['Health & Medical', 'Consumer Rights'],
+    experience: 12,
+    barCouncilNumber: 'UP/5566/2012',
+    hourlyRate: 4500,
+    consultationFee: 1500,
+    location: 'Varanasi',
+    rating: 4.7,
+    reviewCount: 88,
+    casesHandled: 195,
+    casesWon: 160,
+    isAvailable: true,
+  },
+  // 11b. Health & Medical – Geeta Rajan
+  {
+    bio: 'Focuses on pharmaceutical litigation, patient rights advocacy, and medical malpractice suits. Represents both healthcare workers and aggrieved patients in state medical councils.',
+    specialization: ['Health & Medical'],
+    experience: 7,
+    barCouncilNumber: 'TN/8891/2017',
+    hourlyRate: 3500,
+    consultationFee: 1200,
+    location: 'Coimbatore',
+    rating: 4.3,
+    reviewCount: 51,
+    casesHandled: 110,
+    casesWon: 85,
+    isAvailable: true,
+  },
+
+  // 12a. Education Law – Anil Dubey
+  {
+    bio: 'Education law specialist dealing with university disputes, examination malpractice cases, admission fraud, and Right to Education Act enforcement in Madhya Pradesh.',
+    specialization: ['Education Law'],
+    experience: 11,
+    barCouncilNumber: 'MP/2233/2013',
+    hourlyRate: 2800,
+    consultationFee: 900,
+    location: 'Bhopal',
+    rating: 4.5,
+    reviewCount: 60,
+    casesHandled: 145,
+    casesWon: 115,
+    isAvailable: true,
+  },
+  // 12b. Education Law – Smita Kulkarni
+  {
+    bio: 'Handles student grievances, college recognition disputes, faculty service matters, and scholarship denial cases. Frequently consulted by educational trusts on regulatory compliance.',
+    specialization: ['Education Law', 'Employment'],
+    experience: 8,
+    barCouncilNumber: 'MH/1122/2016',
+    hourlyRate: 2500,
+    consultationFee: 800,
+    location: 'Nagpur',
+    rating: 4.4,
+    reviewCount: 47,
+    casesHandled: 120,
+    casesWon: 95,
+    isAvailable: true,
   },
 ];
 
@@ -409,8 +763,22 @@ async function seed() {
     console.log(`   Legal Queries:      ${createdQueries.length}`);
     console.log('═══════════════════════════════════════════');
     console.log('\n📌 Test login credentials:');
-    console.log('   User:     rahul@example.com / password123');
-    console.log('   Advocate: sanjay.advocate@example.com / password123');
+    console.log('   User:      rahul@gmail.com     / password123');
+    console.log('');
+    console.log('   Advocate credentials (Password: Password123 / Domain: @gmail.com)');
+    console.log('   ──────────────────────────────────────────────────────────────');
+    console.log('   Criminal Defense:  sanjay.mehta@gmail.com  |  kavita.reddy@gmail.com');
+    console.log('   Family Law:        sunita.joshi@gmail.com  |  ramesh.iyer@gmail.com');
+    console.log('   Land & Property:   rajesh.kumar@gmail.com  |  meena.pillai@gmail.com');
+    console.log('   Consumer Rights:   deepa.nair@gmail.com    |  kiran.bose@gmail.com');
+    console.log('   Cyber Law:         arjun.desai@gmail.com   |  pooja.menon@gmail.com');
+    console.log('   Business Law:      vikram.chaturvedi@gmail.com | ananya.srivastava@gmail.com');
+    console.log('   Employment:        mohan.rao@gmail.com     |  divya.krishnan@gmail.com');
+    console.log('   Constitution:      harish.pandey@gmail.com |  shilpa.thakur@gmail.com');
+    console.log('   Human Rights:      farhan.sheikh@gmail.com |  nandini.ghosh@gmail.com');
+    console.log('   Traffic Law:       suresh.tiwari@gmail.com |  rekha.malhotra@gmail.com');
+    console.log('   Health & Medical:  pradeep.saxena@gmail.com | geeta.rajan@gmail.com');
+    console.log('   Education Law:     anil.dubey@gmail.com    |  smita.kulkarni@gmail.com');
     console.log('═══════════════════════════════════════════\n');
 
   } catch (err) {
