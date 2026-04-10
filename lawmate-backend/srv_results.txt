@@ -1,3 +1,0 @@
-﻿ac-zp6aunj-shard-00-00.xojhupw.mongodb.net
-ac-zp6aunj-shard-00-01.xojhupw.mongodb.net
-ac-zp6aunj-shard-00-02.xojhupw.mongodb.net
