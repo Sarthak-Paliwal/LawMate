@@ -15,7 +15,8 @@ export default function ChatAssistant() {
   const [messages, setMessages] = useState([
     { role: 'bot', text: 'Hi! I am LawMate AI. How can I assist you today?' }
   ]);
-  const [showOptions, setShowOptions] = useState(true);
+  const [isTyping, setIsTyping] = useState(false);
+  const [hasAskedFAQ, setHasAskedFAQ] = useState(false);
   const navigate = useNavigate();
   const messagesEndRef = useRef(null);
 
@@ -29,11 +30,12 @@ export default function ChatAssistant() {
 
   const handleOptionClick = (option) => {
     setMessages(prev => [...prev, { role: 'user', text: option.q }]);
-    setShowOptions(false);
+    setIsTyping(true);
+    setHasAskedFAQ(true);
     
     setTimeout(() => {
       setMessages(prev => [...prev, { role: 'bot', text: option.a }]);
-      setShowOptions(true);
+      setIsTyping(false);
     }, 600);
   };
 
@@ -67,7 +69,7 @@ export default function ChatAssistant() {
           </div>
 
           {/* Messages */}
-          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-slate-900/50 min-h-[300px]">
+          <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-slate-50 dark:bg-slate-900/50 overscroll-contain clean-scrollbar">
              {messages.map((m, i) => (
                <div key={i} className={`flex ${m.role === 'user' ? 'justify-end' : 'justify-start'}`}>
                  <div className={`max-w-[80%] p-3 rounded-2xl text-sm ${m.role === 'user' ? 'bg-indigo-600 text-white rounded-tr-none' : 'bg-white dark:bg-slate-800 text-default border border-slate-200 dark:border-slate-700 rounded-tl-none shadow-sm'}`}>
@@ -80,7 +82,13 @@ export default function ChatAssistant() {
 
           {/* Options/Inputs */}
           <div className="p-4 border-t border-slate-100 dark:border-slate-800 bg-white dark:bg-slate-900">
-             {showOptions && (
+             {isTyping ? (
+               <div className="flex items-center gap-2 p-2">
+                 <span className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '0ms' }}></span>
+                 <span className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '150ms' }}></span>
+                 <span className="w-2 h-2 rounded-full bg-indigo-400 animate-bounce" style={{ animationDelay: '300ms' }}></span>
+               </div>
+             ) : !hasAskedFAQ ? (
                <div className="space-y-2">
                   <p className="text-[10px] font-bold text-muted uppercase mb-2">Common Questions:</p>
                   <div className="flex flex-wrap gap-2">
@@ -101,6 +109,13 @@ export default function ChatAssistant() {
                     <IoRocketSharp className="inline mr-1" size={14} /> Start Personal Query
                   </button>
                </div>
+             ) : (
+               <button 
+                  onClick={startQuery}
+                  className="w-full bg-indigo-50 dark:bg-indigo-900/20 text-indigo-600 dark:text-indigo-400 text-xs font-bold py-2 rounded-xl border border-indigo-100 dark:border-indigo-900/40 hover:bg-indigo-100 transition"
+               >
+                 <IoRocketSharp className="inline mr-1" size={14} /> Start Personal Query
+               </button>
              )}
           </div>
         </div>

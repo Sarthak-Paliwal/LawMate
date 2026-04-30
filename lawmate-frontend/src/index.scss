@@ -779,4 +779,20 @@ body {
     border-color: var(--color-border);
     color: var(--color-text-muted);
   }
-}
+
+  /* Clean Scrollbar for chat and other small containers */
+  .clean-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(156, 163, 175, 0.5) transparent;
+  }
+  .clean-scrollbar::-webkit-scrollbar {
+    width: 6px;
+  }
+  .clean-scrollbar::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .clean-scrollbar::-webkit-scrollbar-thumb {
+    background-color: rgba(156, 163, 175, 0.5);
+    border-radius: 20px;
+  }
+}
